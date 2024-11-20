@@ -1,0 +1,110 @@
+---
+- name: Ensure immich network is created
+  become: true
+  containers.podman.podman_network:
+    name: immich
+    state: present
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: immich-redis
+    image: docker.io/library/redis:{{ immich_redis_version }}
+    state: quadlet
+    quadlet_filename: immich-redis-container
+    network: immich
+    volumes:
+      - /var/opt/immich-redis:/data:rw
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        After=network-online.target nss-lookup.target
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for immich
+    - Restart immich
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: immich-postgres
+    image: docker.io/tensorchord/pgvecto-rs:{{ immich_postgres_version }}
+    state: quadlet
+    quadlet_filename: immich-postgres-container
+    network: immich
+    volumes:
+      - /var/opt/immich-postgres:/var/lib/postgresql/data:rw
+    env:
+      POSTGRES_PASSWORD: "{{ immich_database_password }}"
+      POSTGRES_USER: postgres
+      POSTGRES_DB: immich
+      POSTGRES_INITDB_ARGS: --data-checksums
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Container]
+        Exec=postgres -c shared_preload_libraries='vectors.so' -c search_path='"$user", public, vectors' -c max_wal_size=2GB -c shared_buffers=512MB -c wal_compression=on
+        [Unit]
+        After=immich-redis.service network-online.target nss-lookup.target
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for immich
+    - Restart immich
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: immich-server
+    image: ghcr.io/immich-app/immich-server:{{ immich_server_version }}
+    state: quadlet
+    quadlet_filename: immich-server-container
+    ports:
+      - 2283:2283
+    network: immich
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/opt/immich-server:/usr/src/app/upload:rw
+    env:
+      TZ: America/New_York
+      DB_PASSWORD: "{{ immich_database_password }}"
+      DB_USERNAME: postgres
+      DB_DATABASE_NAME: immich
+      DB_HOSTNAME: immich-postgres
+      REDIS_HOSTNAME: immich-redis
+      IMMICH_MACHINE_LEARNING_URL: http://immich-machine-learning:3003
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        After=immich-machine-learning.service immich-redis-container.service immich-postgres-container.service network-online.target nss-lookup.target
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for immich
+    - Restart immich
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: immich-machine-learning
+    image: ghcr.io/immich-app/immich-machine-learning:{{ immich_server_version }}
+    state: quadlet
+    quadlet_filename: immich-machine-learning-container
+    network: immich
+    volumes:
+      - /var/opt/immich-machine-learning:/cache:rw
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        After=network-online.target nss-lookup.target
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for immich
+    - Restart immich
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers

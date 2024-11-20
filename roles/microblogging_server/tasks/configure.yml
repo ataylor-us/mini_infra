@@ -1,0 +1,24 @@
+---
+- name: Create a Quadlet file for memos
+  become: true
+  containers.podman.podman_container:
+    name: memos
+    image: docker.io/neosmemo/memos:{{ memos_version }}
+    state: quadlet
+    quadlet_filename: memos-container
+    ports:
+      - 5230:5230
+    network: slirp4netns
+    volumes:
+      - /var/opt/memos:/var/opt/memos:rw
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for memos
+    - Restart services for memos
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers

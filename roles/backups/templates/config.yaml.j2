@@ -1,0 +1,36 @@
+source_directories:
+  - /home
+  - /etc
+  - /root
+  - /var
+repositories:
+    - path: '{{ borg_repo_path }}'
+      label: "local"
+compression: auto,zstd
+encryption_passphrase: '{{ borg_passphrase }}'
+archive_name_format: '{hostname}-{now:%Y-%m-%d-%H%M%S}'
+retries: 5
+retry_wait: 5
+keep_within: 8d
+keep_daily: 15
+keep_weekly: 5
+keep_monthly: 13
+keep_yearly: 2
+before_backup:
+  - podman exec -u postgres:postgres -t immich-postgres pg_dumpall > /root/borgmatic-dump-immich-postgres
+  - sqlite3 /var/opt/linkding/db.sqlite3 .dump > /root/borgmatic-dump-sqlite3-linkding-db
+  - sqlite3 /var/opt/linkding/tasks.sqlite3 .dump > /root/borgmatic-dump-sqlite3-linkding-tasks
+#  - sqlite3 /var/opt/memos/memos_prod.db .dump > /root/borgmatic-dump-sqlite3-memos
+  - sqlite3 /var/opt/forgejo/gitea/gitea.db .dump > /root/borgmatic-dump-sqlite3-forgejo
+  - sqlite3 /var/opt/freshrss/www/freshrss/data/users/alex/db.sqlite .dump > /root/borgmatic-dump-sqlite3-freshrss-_-user
+  - sqlite3 /var/opt/freshrss/www/freshrss/data/users/_/db.sqlite .dump > /root/borgmatic-dump-sqlite3-freshrss-alex-user
+  - sqlite3 /var/opt/navidrome/navidrome.db .dump > /root/borgmatic-dump-sqlite3-navidrome
+after_backup:
+  - rm /root/borgmatic-dump-immich-postgres
+  - rm /root/borgmatic-dump-sqlite3-linkding-db
+  - rm /root/borgmatic-dump-sqlite3-linkding-tasks
+#  - rm /root/borgmatic-dump-sqlite3-memos
+  - rm /root/borgmatic-dump-sqlite3-forgejo
+  - rm /root/borgmatic-dump-sqlite3-freshrss-_-user
+  - rm /root/borgmatic-dump-sqlite3-freshrss-alex-user
+  - rm /root/borgmatic-dump-sqlite3-navidrome

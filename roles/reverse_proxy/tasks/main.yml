@@ -1,0 +1,5 @@
+---
+- name: Write configuration
+  ansible.builtin.include_tasks: configure.yml
+- name: Configure services
+  ansible.builtin.import_tasks: common/tasks/enable_services.yml

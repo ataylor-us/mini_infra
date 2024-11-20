@@ -1,0 +1,15 @@
+---
+- name: Configure system
+  hosts: desktop
+  vars_files:
+    - vars/public.yml
+    - vars/vault.yml
+  roles:
+    - role: reverse_proxy
+    - role: backups
+    - role: version_control_server
+    - role: photo_server
+    - role: feed_reader_server
+    - role: bookmark_server
+#    - role: microblogging_server
+    - role: music_server
