@@ -1,0 +1,30 @@
+---
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: freshrss
+    image: lscr.io/linuxserver/freshrss:{{ freshrss_version }}
+    state: quadlet
+    quadlet_filename: freshrss-container
+    network: slirp4netns
+    ports:
+      - 8083:80
+    volumes:
+      - /var/opt/freshrss:/config:rw
+    env:
+      PUID: 1000
+      PGID: 1000
+      TZ: America/New_York
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        After=network-online.target nss-lookup.target
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for freshrss
+    - Restart freshrss
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers

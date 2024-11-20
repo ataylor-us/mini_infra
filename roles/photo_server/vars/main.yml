@@ -1,0 +1,8 @@
+---
+packages:
+  - podman
+services:
+  - immich-redis-container.service
+  - immich-machine-learning-container.service
+  - immich-postgres-container.service
+  - immich-server-container.service

@@ -1,0 +1,8 @@
+---
+- name: Enable and start services
+  ansible.builtin.systemd:
+    enabled: true
+    name: "{{ item }}"
+    state: started
+  become: true
+  loop: "{{ services }}"

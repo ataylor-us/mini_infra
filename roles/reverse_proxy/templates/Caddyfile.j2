@@ -1,0 +1,44 @@
+{# TODO: Split this out maybe #}
+{
+  admin "unix//var/lib/caddy/admin.socket"
+}
+(cloudflare) {
+  tls {
+    dns cloudflare {{ cloudflare_token }}
+  }
+}
+# immich
+photos.{{ domain_name }} {
+  import cloudflare
+  reverse_proxy {{ local_tailnet_name }}:2283
+}
+# freshrss
+feeds.{{ domain_name }} {
+  import cloudflare
+  reverse_proxy {{ local_tailnet_name }}:8083
+}
+# linkding
+bookmarks.{{ domain_name }} {
+  import cloudflare
+  reverse_proxy {{ local_tailnet_name }}:9091
+}
+# memos
+#note.{{ domain_name }} {
+#  import cloudflare
+#  reverse_proxy {{ local_tailnet_name }}:5230
+#}
+# forgejo
+git.{{ domain_name }} {
+  import cloudflare
+  reverse_proxy {{ local_tailnet_name }}:8700
+}
+# navidrome
+music.{{ domain_name }} {
+  import cloudflare
+  reverse_proxy {{ local_tailnet_name }}:4533
+}
+# jellyfin
+media.{{ domain_name }} {
+  import cloudflare
+  reverse_proxy {{ desktop_tailnet_name }}:8096
+}

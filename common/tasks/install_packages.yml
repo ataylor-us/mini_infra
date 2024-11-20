@@ -1,0 +1,7 @@
+---
+- name: Install packages using dnf
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: latest
+  loop: "{{ packages }}"

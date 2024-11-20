@@ -1,0 +1,28 @@
+---
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: linkding
+    image: docker.io/sissbruecker/linkding:{{ linkding_version }}
+    state: quadlet
+    quadlet_filename: linkding-container
+    network: slirp4netns
+    env:
+      LD_CSRF_TRUSTED_ORIGINS: https://bookmarks.{{ domain_name }}
+    ports:
+      - 9091:9090
+    volumes:
+      - /var/opt/linkding:/etc/linkding/data:rw
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        After=network-online.target nss-lookup.target
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for linkding
+    - Restart linkding
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
