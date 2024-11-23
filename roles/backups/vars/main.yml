@@ -2,3 +2,4 @@
 packages:
   - borgbackup
   - borgmatic
+  - sqlite
