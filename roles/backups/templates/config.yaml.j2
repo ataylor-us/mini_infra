@@ -24,7 +24,7 @@ before_backup:
   - sqlite3 /var/opt/forgejo/gitea/gitea.db .dump > /root/borgmatic-dump-sqlite3-forgejo
   - sqlite3 /var/opt/freshrss/www/freshrss/data/users/alex/db.sqlite .dump > /root/borgmatic-dump-sqlite3-freshrss-_-user
   - sqlite3 /var/opt/freshrss/www/freshrss/data/users/_/db.sqlite .dump > /root/borgmatic-dump-sqlite3-freshrss-alex-user
-  - sqlite3 /var/opt/navidrome/navidrome.db .dump > /root/borgmatic-dump-sqlite3-navidrome
+#  - sqlite3 /var/opt/navidrome/navidrome.db .dump > /root/borgmatic-dump-sqlite3-navidrome
 after_backup:
   - rm /root/borgmatic-dump-immich-postgres
   - rm /root/borgmatic-dump-sqlite3-linkding-db
@@ -33,4 +33,4 @@ after_backup:
   - rm /root/borgmatic-dump-sqlite3-forgejo
   - rm /root/borgmatic-dump-sqlite3-freshrss-_-user
   - rm /root/borgmatic-dump-sqlite3-freshrss-alex-user
-  - rm /root/borgmatic-dump-sqlite3-navidrome
+#  - rm /root/borgmatic-dump-sqlite3-navidrome
