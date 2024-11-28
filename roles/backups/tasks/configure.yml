@@ -1,4 +1,5 @@
 ---
+# TODO: Correct the permissions--I think they change on update
 - name: Create borgmatic config directory
   become: true
   ansible.builtin.file:
