@@ -7,3 +7,4 @@ sudo systemctl disable --now immich-redis-container.service
 sudo systemctl disable --now immich-server-container.service
 sudo systemctl disable --now linkding-container.service
 sudo systemctl disable --now navidrome-container.service
+sudo systemctl disable --now plex-container.service
