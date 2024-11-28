@@ -33,10 +33,10 @@ git.{{ domain_name }} {
   reverse_proxy {{ local_tailnet_name }}:8700
 }
 # navidrome
-music.{{ domain_name }} {
-  import cloudflare
-  reverse_proxy {{ local_tailnet_name }}:4533
-}
+#music.{{ domain_name }} {
+#  import cloudflare
+#  reverse_proxy {{ local_tailnet_name }}:4533
+#}
 # jellyfin
 media.{{ domain_name }} {
   import cloudflare
