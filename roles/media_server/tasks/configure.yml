@@ -1,0 +1,42 @@
+---
+- name: Allow Plex to local network
+  become: true
+  community.general.ufw:
+    rule: allow
+    proto: tcp
+    src: "{{ local_subnet }}"
+    port: "32400"
+    comment: Plex
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: plex
+    image: lscr.io/linuxserver/plex:{{ plex_version }}
+    state: quadlet
+    quadlet_filename: plex-container
+    network: slirp4netns
+    device:
+      - /dev/dri:/dev/dri
+    ports:
+      - 32400:32400
+    volumes:
+      - /var/opt/plex:/config:rw
+      - /home/alex/Music:/Music:ro
+    env:
+      PUID: 1000
+      PGID: 1000
+      TZ: America/New_York
+      VERSION: docker
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        After=network-online.target nss-lookup.target
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for plex
+    - Restart plex
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers

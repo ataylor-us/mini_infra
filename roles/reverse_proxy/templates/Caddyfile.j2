@@ -42,3 +42,15 @@ media.{{ domain_name }} {
   import cloudflare
   reverse_proxy {{ desktop_tailnet_name }}:8096
 }
+# plex
+plex.{{ domain_name }} {
+  import cloudflare
+  header {
+    Strict-Transport-Security max-age=31536000;
+    X-Content-Type-Options nosniff
+    X-Frame-Options DENY
+    Referrer-Policy no-referrer-when-downgrade
+    X-XSS-Protection 1
+  }
+  reverse_proxy {{ local_tailnet_name }}:32400
+}

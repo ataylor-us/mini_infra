@@ -13,3 +13,4 @@
     - role: bookmark_server
 #    - role: microblogging_server
     - role: music_server
+    - role: media_server 
