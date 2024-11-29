@@ -21,7 +21,7 @@
       - 32400:32400
     volumes:
       - /var/opt/plex:/config:rw
-      - /home/alex/Music:/Music:ro
+      - "{{ plex_music_directory }}:/Music:ro"
     env:
       PUID: 1000
       PGID: 1000
