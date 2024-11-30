@@ -37,11 +37,6 @@ git.{{ domain_name }} {
 #  import cloudflare
 #  reverse_proxy {{ local_tailnet_name }}:4533
 #}
-# jellyfin
-media.{{ domain_name }} {
-  import cloudflare
-  reverse_proxy {{ desktop_tailnet_name }}:8096
-}
 # plex
 plex.{{ domain_name }} {
   import cloudflare
