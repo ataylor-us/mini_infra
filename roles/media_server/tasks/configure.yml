@@ -22,6 +22,8 @@
     volumes:
       - /var/opt/plex:/config:rw
       - "{{ plex_music_directory }}:/Music:ro"
+      # autofs & submounts seem to ignore the 'ro' flag in podman
+      - "{{ autofs_directory }}:/mnt:ro,rshared"
     env:
       PUID: 1000
       PGID: 1000

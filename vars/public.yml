@@ -1,4 +1,5 @@
 ---
+autofs_directory: /mnt
 borgmatic_create: borgmatic -C
 borgmatic_create_and_prune: "{{ borgmatic_create }} -p"
 linkding_version: 1.36.0-plus-alpine
