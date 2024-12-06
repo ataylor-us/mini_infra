@@ -8,7 +8,7 @@ freshrss_version: 1.24.3
 #navidrome_version: 0.53.2
 immich_redis_version: 6.2-alpine
 immich_postgres_version: pg14-v0.2.0
-immich_server_version: v1.122.0
+immich_server_version: v1.122.1
 plex_music_directory: /home/alex/Music
 plex_version: latest
 forgejo_version: 9
