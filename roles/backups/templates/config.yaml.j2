@@ -4,7 +4,9 @@ source_directories:
   - /root
   - /var
 repositories:
-    - path: '{{ borg_repo_path }}'
+    - path: '{{ remote_borg_repo_path }}'
+      label: "remote"
+    - path: '{{ local_borg_repo_path }}'
       label: "local"
 compression: auto,zstd
 encryption_passphrase: '{{ borg_passphrase }}'
