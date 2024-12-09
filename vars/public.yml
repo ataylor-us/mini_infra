@@ -9,7 +9,7 @@ freshrss_version: 1.24.3
 local_borg_repo_path: /mnt/mini-borg-repo
 immich_redis_version: 6.2-alpine
 immich_postgres_version: pg14-v0.2.0
-immich_server_version: v1.122.1
+immich_server_version: v1.122.2
 plex_music_directory: /home/alex/Music
 plex_version: latest
 forgejo_version: 9
