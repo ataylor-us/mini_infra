@@ -49,3 +49,9 @@ plex.{{ domain_name }} {
   }
   reverse_proxy {{ local_tailnet_name }}:32400
 }
+# syncthing
+sync.{{ domain_name }} {
+  import cloudflare
+  reverse_proxy {{ local_tailnet_name }}:8384
+}
+
