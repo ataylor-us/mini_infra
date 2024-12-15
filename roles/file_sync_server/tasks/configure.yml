@@ -3,6 +3,7 @@
   become: true
   containers.podman.podman_container:
     name: syncthing
+    hostname: '{{ inventory_hostname }}'
     image: lscr.io/linuxserver/syncthing:{{ syncthing_version }}
     state: quadlet
     quadlet_filename: syncthing-container

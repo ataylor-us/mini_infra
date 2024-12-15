@@ -1,6 +1,6 @@
 ---
 - name: Configure system
-  hosts: desktop
+  hosts: mini
   vars_files:
     - vars/public.yml
     - vars/vault.yml
