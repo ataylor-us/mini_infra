@@ -14,3 +14,4 @@
 #    - role: microblogging_server
 #    - role: music_server
     - role: media_server 
+    - role: file_sync_server

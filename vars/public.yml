@@ -4,6 +4,7 @@ borgmatic_create: borgmatic -C
 borgmatic_create_and_prune: "{{ borgmatic_create }} -p"
 linkding_version: 1.36.0-plus-alpine
 freshrss_version: 1.24.3
+syncthing_version: 1.28.1
 #memos_version: 0.23.0-rc.1
 #navidrome_version: 0.53.2
 local_borg_repo_path: /mnt/mini-borg-repo
