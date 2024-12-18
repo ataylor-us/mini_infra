@@ -11,7 +11,18 @@
     - role: photo_server
     - role: feed_reader_server
     - role: bookmark_server
-#    - role: microblogging_server
-#    - role: music_server
-    - role: media_server 
+    #    - role: microblogging_server
+    #    - role: music_server
+    - role: media_server
     - role: file_sync_server
+  tasks:
+    - name: Add podman cleanup job
+      become: true
+      ansible.builtin.cron:
+        name: Cleanup dangling podman extras
+        minute: "0"
+        hour: "3"
+        day: "*"
+        month: "*"
+        weekday: "0"
+        job: podman volume prune -f >> /dev/null && podman image prune -af >> /dev/null
