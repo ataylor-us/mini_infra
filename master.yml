@@ -15,6 +15,7 @@
     #    - role: music_server
     - role: media_server
     - role: file_sync_server
+    - role: mounts
   tasks:
     - name: Add podman cleanup job
       become: true
