@@ -1,0 +1,17 @@
+---
+- name: Copy auto.cifs
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/auto.cifs
+    group: root
+    mode: "0644"
+    owner: root
+    src: auto.cifs
+- name: Copy auto.master 
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/auto.master
+    group: root
+    mode: "0644"
+    owner: root
+    src: auto.master
