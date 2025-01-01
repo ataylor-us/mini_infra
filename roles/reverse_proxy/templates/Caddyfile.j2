@@ -23,10 +23,10 @@ bookmarks.{{ domain_name }} {
   reverse_proxy {{ local_tailnet_name }}:9091
 }
 # memos
-#note.{{ domain_name }} {
-#  import cloudflare
-#  reverse_proxy {{ local_tailnet_name }}:5230
-#}
+blog.{{ domain_name }} {
+  import cloudflare
+  reverse_proxy {{ local_tailnet_name }}:5230
+}
 # forgejo
 git.{{ domain_name }} {
   import cloudflare
