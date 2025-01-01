@@ -16,3 +16,4 @@ forgejo_version: 9
 caddy_url: https://caddyserver.com/api/download?os=linux&arch=amd64&p=github.com%2Fcaddy-dns%2Fcloudflare
 caddy_user: caddy
 caddy_user_home: /var/lib/caddy
+pinchflat_version: latest

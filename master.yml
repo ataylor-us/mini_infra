@@ -16,6 +16,8 @@
     - role: media_server
     - role: file_sync_server
     - role: mounts
+    # BROKEN: mounts are mounting bad with autofs
+    #    - role: tube_download_server
   tasks:
     - name: Add podman cleanup job
       become: true
