@@ -1,0 +1,30 @@
+---
+- name: Create a Quadlet file for pinchflat
+  become: true
+  containers.podman.podman_container:
+    name: pinchflat
+    image: ghcr.io/kieraneglin/pinchflat:{{ pinchflat_version }}
+    state: quadlet
+    quadlet_filename: pinchflat-container
+    env:
+      TZ: America/New_York
+      EXPOSE_FEED_ENDPOINTS: true
+      MEDIA_PATH: /mnt/YouTube
+    ports:
+      - 8945:8945
+    network: slirp4netns
+    user: 1000:1000
+    volumes:
+      - /var/opt/pinchflat:/config:rw
+      - "{{ autofs_directory }}:/mnt:rw,rshared"
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for pinchflat
+    - Restart pinchflat
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
