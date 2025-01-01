@@ -11,7 +11,7 @@
     - role: photo_server
     - role: feed_reader_server
     - role: bookmark_server
-    #    - role: microblogging_server
+    - role: microblogging_server
     #    - role: music_server
     - role: media_server
     - role: file_sync_server
