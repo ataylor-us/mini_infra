@@ -9,13 +9,16 @@
     env:
       TZ: America/New_York
       EXPOSE_FEED_ENDPOINTS: true
-      MEDIA_PATH: /mnt/YouTube
     ports:
       - 8945:8945
     network: slirp4netns
     user: 1000:1000
     volumes:
       - /var/opt/pinchflat:/config:rw
+      # hack to make /downloads writable and not break autofs mounting on boot
+      # has a symlink to the correct directory
+      - /var/opt/pinchflat-symlinks:/downloads:rw
+      # symlink points to a directory here
       - "{{ autofs_directory }}:/mnt:rw,rshared"
     quadlet_options:
       - AutoUpdate=registry
@@ -23,8 +26,5 @@
       - |
         [Install]
         WantedBy=default.target
-  notify:
-    - Reload systemd for pinchflat
-    - Restart pinchflat
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
