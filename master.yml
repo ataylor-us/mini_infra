@@ -16,7 +16,10 @@
     - role: media_server
     - role: file_sync_server
     - role: mounts
-    - role: tube_download_server
+    # Was unable to get this to work with my autofs/cifs mount
+    # https://github.com/kieraneglin/pinchflat/issues/139
+    # Putting on hold until I can download to a temp directory:
+    #    - role: tube_download_server
   tasks:
     - name: Add podman cleanup job
       become: true
