@@ -1,0 +1,34 @@
+---
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: mealie
+    image: ghcr.io/mealie-recipes/mealie:{{ mealie_version }}
+    state: quadlet
+    quadlet_filename: mealie-container
+    network: slirp4netns
+    memory: 1000m
+    env:
+      ALLOW_SIGNUP: "false"
+      PUID: 1000
+      PGID: 1000
+      TZ: America/New_York
+      BASE_URL: https://recipe.{{ domain_name }}
+      OPENAI_API_KEY: '{{ mealie_openai_key }}'
+    ports:
+      - 9000:9000
+    volumes:
+      - /var/opt/mealie:/app/data:rw
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        After=network-online.target nss-lookup.target
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for mealie
+    - Restart mealie
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers

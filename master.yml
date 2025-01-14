@@ -20,6 +20,7 @@
     # https://github.com/kieraneglin/pinchflat/issues/139
     # Putting on hold until I can download to a temp directory:
     #    - role: tube_download_server
+    - role: recipe_server
   tasks:
     - name: Add podman cleanup job
       become: true
