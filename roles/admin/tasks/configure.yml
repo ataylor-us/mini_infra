@@ -1,0 +1,9 @@
+---
+- name: Copy cockpit config
+  become: true
+  ansible.builtin.template:
+    dest: /etc/cockpit/cockpit.conf
+    group: root
+    mode: "0644"
+    owner: root
+    src: cockpit.conf.j2

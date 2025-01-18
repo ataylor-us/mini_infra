@@ -1,0 +1,5 @@
+---
+packages:
+  - cockpit
+services:
+  - cockpit.socket

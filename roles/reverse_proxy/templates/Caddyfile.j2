@@ -64,3 +64,12 @@ recipe.{{ domain_name }} {
   import cloudflare
   reverse_proxy {{ local_tailnet_name }}:9000
 }
+# cockpit
+server.{{ domain_name }} {
+  import cloudflare
+  reverse_proxy {{ local_tailnet_name }}:9090 {
+    transport http {
+      tls_insecure_skip_verify
+    }
+  }
+}
