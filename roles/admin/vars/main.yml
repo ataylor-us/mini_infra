@@ -1,5 +1,7 @@
 ---
 packages:
   - cockpit
+  - cockpit-podman
 services:
   - cockpit.socket
+  - podman.socket
