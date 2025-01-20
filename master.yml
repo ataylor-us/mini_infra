@@ -22,6 +22,7 @@
     # Putting on hold until I can download to a temp directory:
     #    - role: tube_download
     - role: recipes
+    - role: email_client
   tasks:
     - name: Add podman cleanup job
       become: true
