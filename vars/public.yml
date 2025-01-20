@@ -6,7 +6,6 @@ linkding_version: 1.36.0-plus-alpine
 freshrss_version: 1.25.0
 syncthing_version: latest
 memos_version: 0.23.0
-#navidrome_version: 0.53.2
 local_borg_repo_path: /mnt/mini-borg-repo
 immich_redis_version: 6.2-alpine
 immich_postgres_version: pg14-v0.2.0
