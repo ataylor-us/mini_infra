@@ -8,20 +8,20 @@
     - role: reverse_proxy
     - role: backups
     - role: admin
-    - role: version_control_server
-    - role: photo_server
-    - role: feed_reader_server
-    - role: bookmark_server
-    - role: microblogging_server
-    #    - role: music_server
-    - role: media_server
-    - role: file_sync_server
+    - role: version_control
+    - role: photos
+    - role: feed_reader
+    - role: bookmarks
+    - role: microblogging
+    #    - role: music
+    - role: media
+    - role: file_sync
     - role: mounts
     # Was unable to get this to work with my autofs/cifs mount
     # https://github.com/kieraneglin/pinchflat/issues/139
     # Putting on hold until I can download to a temp directory:
-    #    - role: tube_download_server
-    - role: recipe_server
+    #    - role: tube_download
+    - role: recipes
   tasks:
     - name: Add podman cleanup job
       become: true
