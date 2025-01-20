@@ -1,0 +1,26 @@
+---
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: snappymail
+    image: ghcr.io/the-djmaze/snappymail:{{ snappymail_version }}
+    state: quadlet
+    quadlet_filename: snappymail-container
+    network: slirp4netns
+    ports:
+      - 8888:8888
+    volumes:
+      - /var/opt/snappymail:/var/lib/snappymail:rw
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        After=network-online.target nss-lookup.target
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for snappymail
+    - Restart snappymail
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
