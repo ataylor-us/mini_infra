@@ -22,6 +22,7 @@
     #    - role: tube_download
     - role: recipes
     - role: email_client
+    - role: notifications
   tasks:
     - name: Add podman cleanup job
       become: true

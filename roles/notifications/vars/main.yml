@@ -1,0 +1,8 @@
+---
+packages:
+  - podman
+  - slirp4netns
+  - msmtp
+  - s-nail
+services:
+  - mailrise-container.service
