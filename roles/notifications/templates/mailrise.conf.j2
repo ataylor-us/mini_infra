@@ -1,0 +1,8 @@
+listen.port:
+  - 8025
+tls.mode:
+  - none
+configs:
+  {{ inventory_hostname }}@{{ mailrise_domain }}:
+    urls:
+      - pover://{{ pushover_user_key }}@{{ pushover_application_key }}
