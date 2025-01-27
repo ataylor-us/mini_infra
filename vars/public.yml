@@ -2,7 +2,7 @@
 autofs_directory: /mnt
 borgmatic_create: borgmatic -C
 borgmatic_create_and_prune: "{{ borgmatic_create }} -p"
-linkding_version: 1.36.0-plus-alpine
+linkding_version: 1.37.0-plus-alpine
 snappymail_version: latest
 freshrss_version: 1.25.0
 syncthing_version: latest
