@@ -1,0 +1,30 @@
+---
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: wishlist
+    image: ghcr.io/cmintey/wishlist:{{ wishlist_version }}
+    state: quadlet
+    quadlet_filename: wishlist-container
+    network: slirp4netns
+    env:
+      ORIGIN: https://wishlist.{{ domain_name }}
+      TOKEN_TIME: 72
+    ports:
+      - 3280:3280
+    volumes:
+      - /var/opt/wishlist/images:/usr/src/app/uploads:rw
+      - /var/opt/wishlist/data:/usr/src/app/data:rw
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        After=network-online.target nss-lookup.target
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for wishlist
+    - Restart wishlist
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers

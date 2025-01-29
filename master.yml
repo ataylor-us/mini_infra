@@ -23,6 +23,7 @@
     - role: recipes
     - role: email_client
     - role: notifications
+    - role: wishlist
   tasks:
     - name: Add podman cleanup job
       become: true
