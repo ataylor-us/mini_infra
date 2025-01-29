@@ -6,7 +6,7 @@ linkding_version: 1.37.0-plus-alpine
 snappymail_version: latest
 freshrss_version: 1.25.0
 syncthing_version: latest
-memos_version: 0.23.0
+memos_version: stable
 local_borg_repo_path: /mnt/mini-borg-repo
 immich_redis_version: 6.2-alpine
 immich_postgres_version: pg14-v0.2.0
