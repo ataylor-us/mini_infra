@@ -31,6 +31,7 @@ before_backup:
   - sqlite3 /var/opt/freshrss/www/freshrss/data/users/_/db.sqlite .dump > /root/borgmatic-dump-sqlite3-freshrss-alex-user
 #  - sqlite3 /var/opt/pinchflat/db/pinchflat.db .dump > /root/borgmatic-dump-sqlite3-pinchflat
   - sqlite3 /var/opt/mealie/mealie.db .dump > /root/borgmatic-dump-sqlite3-mealie
+  - sqlite3 /var/opt/wishlist/data/prod.db .dump > /root/borgmatic-dump-sqlite3-wishlist
 after_backup:
   - rm /root/borgmatic-dump-immich-postgres
   - rm /root/borgmatic-dump-sqlite3-linkding-db
@@ -41,3 +42,4 @@ after_backup:
   - rm /root/borgmatic-dump-sqlite3-freshrss-alex-user
 #  - rm /var/opt/pinchflat/db/pinchflat.db
   - rm /root/borgmatic-dump-sqlite3-mealie
+  - rm /root/borgmatic-dump-sqlite3-wishlist
