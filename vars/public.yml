@@ -13,7 +13,7 @@ immich_postgres_version: pg14-v0.2.0
 immich_server_version: v1.125.6
 mailrise_domain: mailrise
 mailrise_version: latest
-mealie_version: v2.4.2
+mealie_version: latest
 plex_version: latest
 forgejo_version: 9
 caddy_url: https://caddyserver.com/api/download?os=linux&arch=amd64&p=github.com%2Fcaddy-dns%2Fcloudflare
