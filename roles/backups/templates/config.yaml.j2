@@ -23,6 +23,7 @@ keep_monthly: 2
 keep_yearly: 0
 before_backup:
   - podman exec -u postgres:postgres -t immich-postgres pg_dumpall > /root/borgmatic-dump-immich-postgres
+  - podman exec -t wishthis-database mariadb-dump -u root -p{{ wishthis_database_root_password }} -x -A > /root/borgmatic-dump-wishthis-mariadb
   - sqlite3 /var/opt/linkding/db.sqlite3 .dump > /root/borgmatic-dump-sqlite3-linkding-db
   - sqlite3 /var/opt/linkding/tasks.sqlite3 .dump > /root/borgmatic-dump-sqlite3-linkding-tasks
   - sqlite3 /var/opt/memos/memos_prod.db .dump > /root/borgmatic-dump-sqlite3-memos
@@ -31,9 +32,9 @@ before_backup:
   - sqlite3 /var/opt/freshrss/www/freshrss/data/users/_/db.sqlite .dump > /root/borgmatic-dump-sqlite3-freshrss-alex-user
 #  - sqlite3 /var/opt/pinchflat/db/pinchflat.db .dump > /root/borgmatic-dump-sqlite3-pinchflat
   - sqlite3 /var/opt/mealie/mealie.db .dump > /root/borgmatic-dump-sqlite3-mealie
-  - sqlite3 /var/opt/wishlist/data/prod.db .dump > /root/borgmatic-dump-sqlite3-wishlist
 after_backup:
   - rm /root/borgmatic-dump-immich-postgres
+  - rm /root/borgmatic-dump-wishthis-mariadb
   - rm /root/borgmatic-dump-sqlite3-linkding-db
   - rm /root/borgmatic-dump-sqlite3-linkding-tasks
   - rm /root/borgmatic-dump-sqlite3-memos
@@ -42,4 +43,3 @@ after_backup:
   - rm /root/borgmatic-dump-sqlite3-freshrss-alex-user
 #  - rm /var/opt/pinchflat/db/pinchflat.db
   - rm /root/borgmatic-dump-sqlite3-mealie
-  - rm /root/borgmatic-dump-sqlite3-wishlist
