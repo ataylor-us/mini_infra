@@ -1,20 +1,25 @@
 ---
+- name: Ensure wishthis network is created
+  become: true
+  containers.podman.podman_network:
+    name: wishthis
+    state: present
 - name: Create a Quadlet file
   become: true
   containers.podman.podman_container:
-    name: wishlist
-    image: ghcr.io/cmintey/wishlist:{{ wishlist_version }}
+    name: wishthis-database
+    image: docker.io/library/mariadb:{{ wishthis_database_version }}
     state: quadlet
-    quadlet_filename: wishlist-container
-    network: slirp4netns
-    env:
-      ORIGIN: https://wishlist.{{ domain_name }}
-      TOKEN_TIME: 72
-    ports:
-      - 3280:3280
+    quadlet_filename: wishthis-database-container
+    user: root
+    network: wishthis
     volumes:
-      - /var/opt/wishlist/images:/usr/src/app/uploads:rw
-      - /var/opt/wishlist/data:/usr/src/app/data:rw
+      - /var/opt/wishthis-database:/var/lib/mysql:rw
+    env:
+      MARIADB_ROOT_PASSWORD: "{{ wishthis_database_root_password }}"
+      MARIADB_DATABASE: wishthis
+      MARIADB_USER: wishthis
+      MARIADB_PASSWORD: "{{ wishthis_database_user_password }}"
     quadlet_options:
       - AutoUpdate=registry
       - Pull=always
@@ -24,7 +29,34 @@
         [Install]
         WantedBy=default.target
   notify:
-    - Reload systemd for wishlist
-    - Restart wishlist
+    - Reload systemd for wishthis
+    - Restart wishthis
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: wishthis-server
+    image: docker.io/hiob/wishthis:{{ wishthis_server_version }}
+    state: quadlet
+    quadlet_filename: wishthis-server-container
+    cap_add: 
+      - NET_BIND_SERVICE
+    ports:
+      - 8119:80
+    network: wishthis
+    volumes:
+      - /var/opt/wishthis-server/config.php:/var/www/html/src/config/config.php:rw
+    env:
+      VIRTUAL_HOST: wishlist.{{ domain_name }}
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        After=wishthis-database-container.service network-online.target nss-lookup.target
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for wishthis
+    - Restart wishthis
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers

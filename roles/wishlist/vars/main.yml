@@ -1,6 +1,6 @@
 ---
 packages:
   - podman
-  - slirp4netns
 services:
-  - wishlist-container.service
+  - wishthis-database-container.service
+  - wishthis-server-container.service
