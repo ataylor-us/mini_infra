@@ -20,5 +20,4 @@ caddy_url: https://caddyserver.com/api/download?os=linux&arch=amd64&p=github.com
 caddy_user: caddy
 caddy_user_home: /var/lib/caddy
 pinchflat_version: latest
-wishthis_database_version: lts
-wishthis_server_version: stable
+wishlist_version: latest

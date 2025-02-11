@@ -1,10 +1,10 @@
 ---
-- name: Reload systemd for wishthis
+- name: Reload systemd for wishlist
   ansible.builtin.systemd:
     daemon_reload: true
   become: true
   changed_when: true
-- name: Restart wishthis
+- name: Restart wishlist
   ansible.builtin.systemd:
     name: "{{ item }}"
     state: restarted
