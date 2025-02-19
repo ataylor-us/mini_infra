@@ -66,6 +66,7 @@
     quadlet_filename: hoarder-server-container
     network: hoarder
     ports: 3000:3000
+    stop_time: 30
     volumes:
       - /var/opt/hoarder-server:/data
     env:
