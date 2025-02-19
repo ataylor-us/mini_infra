@@ -1,0 +1,98 @@
+---
+- name: Ensure hoarder network is created
+  become: true
+  containers.podman.podman_network:
+    name: hoarder
+    state: present
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: hoarder-meilisearch
+    image: docker.io/getmeili/meilisearch:{{ hoarder_meilisearch_version }}
+    state: quadlet
+    quadlet_filename: hoarder-meilisearch-container
+    network: hoarder
+    volumes:
+      - /var/opt/hoarder-meilisearch:/meili_data:rw
+    env:
+      MEILI_NO_ANALYTICS: "true"
+      HOARDER_VERSION: release
+      NEXTAUTH_SECRET: "{{ hoarder_nextauth_secret }}"
+      MEILI_MASTER_KEY: "{{ hoarder_meili_master_key }}"
+      NEXTAUTH_URL: http://localhost:3000
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        After=network-online.target nss-lookup.target
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for hoarder
+    - Restart hoarder
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: hoarder-chrome
+    image: gcr.io/zenika-hub/alpine-chrome:{{ hoarder_chrome_version }}
+    state: quadlet
+    quadlet_filename: hoarder-chrome-container
+    network: hoarder
+    command:
+      - --no-sandbox
+      - --disable-gpu
+      - --disable-dev-shm-usage
+      - --remote-debugging-address=0.0.0.0
+      - --remote-debugging-port=9222
+      - --hide-scrollbars
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        After=network-online.target nss-lookup.target
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for hoarder
+    - Restart hoarder
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: hoarder-server
+    image: ghcr.io/hoarder-app/hoarder:{{ hoarder_server_version }}
+    state: quadlet
+    quadlet_filename: hoarder-server-container
+    network: hoarder
+    ports: 3000:3000
+    volumes:
+      - /var/opt/hoarder-server:/data
+    env:
+      HOARDER_VERSION: release
+      NEXTAUTH_SECRET: "{{ hoarder_nextauth_secret }}"
+      MEILI_MASTER_KEY: "{{ hoarder_meili_master_key }}"
+      NEXTAUTH_URL: http://localhost:3000
+      MEILI_ADDR: http://hoarder-meilisearch:7700
+      BROWSER_WEB_URL: http://hoarder-chrome:9222
+      OPENAI_API_KEY: "{{ hoarder_openai_key }}"
+      DATA_DIR: /data
+      CRAWLER_FULL_PAGE_SCREENSHOT: 'true'
+      CRAWLER_FULL_PAGE_ARCHIVE: 'true'
+      CRAWLER_VIDEO_DOWNLOAD: 'true'
+      CRAWLER_VIDEO_DOWNLOAD_MAX_SIZE: 250
+      DISABLE_SIGNUPS: 'true'
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        [Unit]
+        After=hoarder-chrome.service hoarder-meilisearch.service network-online.target nss-lookup.target
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for hoarder
+    - Restart hoarder   
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
