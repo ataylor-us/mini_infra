@@ -24,7 +24,6 @@
     - role: recipes
     - role: email_client
     - role: notifications
-    - role: wishlist
     - role: private
     - role: links
   tasks:

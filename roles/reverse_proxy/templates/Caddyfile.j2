@@ -73,11 +73,6 @@ email.{{ domain_name }} {
   import cloudflare
   reverse_proxy {{ local_tailnet_name }}:8888
 }
-# wishlist
-wishlist.{{ domain_name }} {
-  import cloudflare
-  reverse_proxy {{ local_tailnet_name }}:3280
-}
 # hoarder
 links.{{ domain_name }} {
   import cloudflare
