@@ -26,6 +26,7 @@
     - role: notifications
     - role: wishlist
     - role: private
+    - role: links
   tasks:
     - name: Add podman cleanup job
       become: true

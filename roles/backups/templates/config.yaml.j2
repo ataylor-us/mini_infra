@@ -32,6 +32,8 @@ before_backup:
 #  - sqlite3 /var/opt/pinchflat/db/pinchflat.db .dump > /root/borgmatic-dump-sqlite3-pinchflat
   - sqlite3 /var/opt/mealie/mealie.db .dump > /root/borgmatic-dump-sqlite3-mealie
   - sqlite3 /var/opt/wishlist/data/prod.db .dump > /root/borgmatic-dump-sqlite3-wishlist
+  - sqlite3 /var/opt/hoarder-server/db.db .dump > /root/borgmatic-dump-sqlite3-hoarder-db
+  - sqlite3 /var/opt/hoarder-server/queue.db .dump > /root/borgmatic-dump-sqlite3-hoarder-queue
 after_backup:
   - rm /root/borgmatic-dump-immich-postgres
   - rm /root/borgmatic-dump-sqlite3-linkding-db
@@ -43,3 +45,5 @@ after_backup:
 #  - rm /var/opt/pinchflat/db/pinchflat.db
   - rm /root/borgmatic-dump-sqlite3-mealie
   - rm /root/borgmatic-dump-sqlite3-wishlist
+  - rm /root/borgmatic-dump-sqlite3-hoarder-db
+  - rm /root/borgmatic-dump-sqlite3-hoarder-queue
