@@ -26,6 +26,7 @@
     - role: notifications
     - role: private
     - role: links
+    - role: ai_client
   tasks:
     - name: Add podman cleanup job
       become: true
