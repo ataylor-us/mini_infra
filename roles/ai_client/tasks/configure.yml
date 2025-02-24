@@ -1,0 +1,26 @@
+---
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: open-webui
+    image: ghcr.io/open-webui/open-webui:{{ open_webui_version }}
+    state: quadlet
+    quadlet_filename: open-webui-container
+    network: slirp4netns
+    ports:
+      - 8084:8080
+    volumes:
+      - /var/opt/open-webui:/app/backend/data:rw
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        After=network-online.target nss-lookup.target
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for open-webui
+    - Restart open-webui
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers

@@ -17,6 +17,7 @@ hoarder_chrome_version: 123
 mailrise_domain: mailrise
 mailrise_version: latest
 mealie_version: latest
+open_webui_version: main
 plex_version: latest
 forgejo_version: 9
 caddy_url: https://caddyserver.com/api/download?os=linux&arch=amd64&p=github.com%2Fcaddy-dns%2Fcloudflare
