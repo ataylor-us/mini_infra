@@ -33,6 +33,8 @@ before_backup:
   - sqlite3 /var/opt/mealie/mealie.db .dump > /root/borgmatic-dump-sqlite3-mealie
   - sqlite3 /var/opt/hoarder-server/db.db .dump > /root/borgmatic-dump-sqlite3-hoarder-db
   - sqlite3 /var/opt/hoarder-server/queue.db .dump > /root/borgmatic-dump-sqlite3-hoarder-queue
+  - sqlite3 /var/opt/open-webui/webui.db .dump > /root/borgmatic-dump-sqlite3-openwebui-db
+  - sqlite3 /var/opt/open-webui/vector_db/chroma.sqlite3 .dump > /root/borgmatic-dump-sqlite3-openwebui-chroma-db
 after_backup:
   - rm /root/borgmatic-dump-immich-postgres
   - rm /root/borgmatic-dump-sqlite3-linkding-db
@@ -45,3 +47,5 @@ after_backup:
   - rm /root/borgmatic-dump-sqlite3-mealie
   - rm /root/borgmatic-dump-sqlite3-hoarder-db
   - rm /root/borgmatic-dump-sqlite3-hoarder-queue
+  - rm /root/borgmatic-dump-sqlite3-openwebui-db
+  - rm /root/borgmatic-dump-sqlite3-openwebui-chroma-db
