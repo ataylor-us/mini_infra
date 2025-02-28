@@ -17,7 +17,10 @@
     - role: media
     - role: file_sync
     - role: mounts
-    - role: tube_download
+    # Was unable to get this to work with my autofs/cifs mount
+    # https://github.com/kieraneglin/pinchflat/issues/139
+    # Putting on hold until I can download to a temp directory:
+    #    - role: tube_download
     - role: recipes
     - role: email_client
     - role: notifications
