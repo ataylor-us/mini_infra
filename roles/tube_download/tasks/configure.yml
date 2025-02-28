@@ -9,7 +9,6 @@
     env:
       TZ: America/New_York
       EXPOSE_FEED_ENDPOINTS: true
-      YT_DLP_WORKER_CONCURRENCY: 1
     ports:
       - 8945:8945
     network: slirp4netns
