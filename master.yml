@@ -37,7 +37,7 @@
         day: "*"
         month: "*"
         weekday: "0"
-        job: podman volume prune -f >> /dev/null && podman image prune -af >> /dev/null
+        job: podman volume prune -f &> /dev/null && podman image prune -af &> /dev/null
     - name: Add podman cleanup job (user)
       become: false
       ansible.builtin.cron:
@@ -47,4 +47,4 @@
         day: "*"
         month: "*"
         weekday: "0"
-        job: podman volume prune -f >> /dev/null && podman image prune -af >> /dev/null
+        job: podman volume prune -f &> /dev/null && podman image prune -af &> /dev/null
