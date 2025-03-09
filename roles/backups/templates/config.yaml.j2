@@ -4,8 +4,6 @@ source_directories:
   - /root
   - /var
   - /mnt/Music
-exclude_patterns:
-  - /var/opt/pinchflat-symlinks
 repositories:
     - path: '{{ remote_borg_repo_path }}'
       label: "remote"
@@ -29,7 +27,6 @@ before_backup:
   - sqlite3 /var/opt/forgejo/gitea/gitea.db .dump > /root/borgmatic-dump-sqlite3-forgejo
   - sqlite3 /var/opt/freshrss/www/freshrss/data/users/alex/db.sqlite .dump > /root/borgmatic-dump-sqlite3-freshrss-_-user
   - sqlite3 /var/opt/freshrss/www/freshrss/data/users/_/db.sqlite .dump > /root/borgmatic-dump-sqlite3-freshrss-alex-user
-#  - sqlite3 /var/opt/pinchflat/db/pinchflat.db .dump > /root/borgmatic-dump-sqlite3-pinchflat
   - sqlite3 /var/opt/mealie/mealie.db .dump > /root/borgmatic-dump-sqlite3-mealie
   - sqlite3 /var/opt/hoarder-server/db.db .dump > /root/borgmatic-dump-sqlite3-hoarder-db
   - sqlite3 /var/opt/hoarder-server/queue.db .dump > /root/borgmatic-dump-sqlite3-hoarder-queue
@@ -43,7 +40,6 @@ after_backup:
   - rm /root/borgmatic-dump-sqlite3-forgejo
   - rm /root/borgmatic-dump-sqlite3-freshrss-_-user
   - rm /root/borgmatic-dump-sqlite3-freshrss-alex-user
-#  - rm /var/opt/pinchflat/db/pinchflat.db
   - rm /root/borgmatic-dump-sqlite3-mealie
   - rm /root/borgmatic-dump-sqlite3-hoarder-db
   - rm /root/borgmatic-dump-sqlite3-hoarder-queue
