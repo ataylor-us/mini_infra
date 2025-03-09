@@ -1,6 +1,0 @@
----
-packages:
-  - autofs
-  - cifs-utils
-services:
-  - autofs.service
