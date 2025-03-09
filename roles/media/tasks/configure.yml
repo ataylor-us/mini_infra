@@ -21,8 +21,7 @@
       - 32400:32400
     volumes:
       - /var/opt/plex:/config:rw
-      # autofs & submounts seem to ignore the 'ro' flag in podman
-      - "{{ autofs_directory }}:/mnt:ro,rshared"
+      - /mnt:/mnt:rw
     env:
       PUID: 1000
       PGID: 1000
