@@ -78,11 +78,11 @@
       BROWSER_WEB_URL: http://hoarder-chrome:9222
       OPENAI_API_KEY: "{{ hoarder_openai_key }}"
       DATA_DIR: /data
-      CRAWLER_FULL_PAGE_SCREENSHOT: 'true'
-      CRAWLER_FULL_PAGE_ARCHIVE: 'true'
-      CRAWLER_VIDEO_DOWNLOAD: 'true'
+      CRAWLER_FULL_PAGE_SCREENSHOT: "true"
+      CRAWLER_FULL_PAGE_ARCHIVE: "true"
+      CRAWLER_VIDEO_DOWNLOAD: "true"
       CRAWLER_VIDEO_DOWNLOAD_MAX_SIZE: 250
-      DISABLE_SIGNUPS: 'true'
+      DISABLE_SIGNUPS: "true"
     quadlet_options:
       - AutoUpdate=registry
       - Pull=always
@@ -94,6 +94,6 @@
         WantedBy=default.target
   notify:
     - Reload systemd for hoarder
-    - Restart hoarder   
+    - Restart hoarder
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
