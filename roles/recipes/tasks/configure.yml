@@ -14,7 +14,7 @@
       PGID: 1000
       TZ: America/New_York
       BASE_URL: https://recipe.{{ domain_name }}
-      OPENAI_API_KEY: '{{ mealie_openai_key }}'
+      OPENAI_API_KEY: "{{ mealie_openai_key }}"
     ports:
       - 9000:9000
     volumes:
