@@ -7,7 +7,7 @@
     system: true
     create_home: true
     home: "{{ caddy_user_home }}"
-- name: Add caddy binary (with cloudflare)
+- name: Add caddy binary
   become: true
   ansible.builtin.get_url:
     url: "{{ caddy_url }}"
