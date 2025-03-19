@@ -4,4 +4,3 @@
 - [ ] Test SELinux (or enforce disabling)
 - [ ] Add tailscale config
 - [ ] Migrate mealie to separate box
-- [ ] Add webdav directory to Caddy for Obsidian backup
