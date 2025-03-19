@@ -1,6 +1,4 @@
 ---
-borgmatic_create: borgmatic -C
-borgmatic_create_and_prune: "{{ borgmatic_create }} -p"
 linkding_version: latest-plus-alpine
 snappymail_version: latest
 freshrss_version: latest
