@@ -2,11 +2,11 @@
 - name: Add system user
   become: true
   ansible.builtin.user:
-    name: "{{ caddy_user }}"
+    name: caddy
     shell: /usr/bin/nologin
     system: true
     create_home: true
-    home: "{{ caddy_user_home }}"
+    home: /var/lib/caddy
 - name: Add caddy binary
   become: true
   ansible.builtin.get_url:
