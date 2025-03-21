@@ -7,7 +7,7 @@
     state: quadlet
     quadlet_filename: mealie-container
     network: slirp4netns
-    memory: 1000m
+    memory: 500m
     env:
       ALLOW_SIGNUP: "false"
       PUID: 1000
