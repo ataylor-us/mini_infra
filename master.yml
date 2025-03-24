@@ -12,7 +12,6 @@
     - role: version_control
     - role: photos
     - role: feed_reader
-    - role: bookmarks
     - role: microblogging
     - role: media
     - role: file_sync

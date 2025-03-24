@@ -17,11 +17,6 @@ feeds.{{ domain_name }} {
   import cloudflare
   reverse_proxy {{ local_tailnet_name }}:8083
 }
-# linkding
-bookmarks.{{ domain_name }} {
-  import cloudflare
-  reverse_proxy {{ local_tailnet_name }}:9091
-}
 # memos
 blog.{{ domain_name }} {
   import cloudflare
