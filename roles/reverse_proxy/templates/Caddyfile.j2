@@ -53,11 +53,6 @@ server.{{ domain_name }} {
     }
   }
 }
-# snappymail
-email.{{ domain_name }} {
-  import cloudflare
-  reverse_proxy {{ local_tailnet_name }}:8888
-}
 # hoarder
 links.{{ domain_name }} {
   import cloudflare
