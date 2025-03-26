@@ -13,6 +13,7 @@ hoarder_server_version: release
 hoarder_chrome_version: 123
 mailrise_domain: mailrise
 mailrise_version: latest
+mealie_version: latest
 open_webui_version: main
 plex_version: latest
 forgejo_version: 9

@@ -1,0 +1,6 @@
+---
+packages:
+  - podman
+  - slirp4netns
+services:
+  - mealie-container.service

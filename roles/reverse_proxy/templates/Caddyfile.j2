@@ -44,6 +44,11 @@ sync.{{ domain_name }} {
   import cloudflare
   reverse_proxy {{ local_tailnet_name }}:8384
 }
+# mealie
+recipe.{{ domain_name }} {
+  import cloudflare
+  reverse_proxy {{ local_tailnet_name }}:9000
+}
 # cockpit
 server.{{ domain_name }} {
   import cloudflare
