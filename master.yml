@@ -15,6 +15,7 @@
     - role: microblogging
     - role: media
     - role: file_sync
+    - role: recipes
     - role: notifications
     - role: private
     - role: links
