@@ -25,6 +25,7 @@ before_backup:
   - sqlite3 /var/opt/forgejo/gitea/gitea.db .dump > /root/borgmatic-dump-sqlite3-forgejo
   - sqlite3 /var/opt/freshrss/www/freshrss/data/users/alex/db.sqlite .dump > /root/borgmatic-dump-sqlite3-freshrss-_-user
   - sqlite3 /var/opt/freshrss/www/freshrss/data/users/_/db.sqlite .dump > /root/borgmatic-dump-sqlite3-freshrss-alex-user
+  - sqlite3 /var/opt/mealie/mealie.db .dump > /root/borgmatic-dump-sqlite3-mealie
   - sqlite3 /var/opt/hoarder-server/db.db .dump > /root/borgmatic-dump-sqlite3-hoarder-db
   - sqlite3 /var/opt/hoarder-server/queue.db .dump > /root/borgmatic-dump-sqlite3-hoarder-queue
   - sqlite3 /var/opt/open-webui/webui.db .dump > /root/borgmatic-dump-sqlite3-openwebui-db
@@ -35,6 +36,7 @@ after_backup:
   - rm /root/borgmatic-dump-sqlite3-forgejo
   - rm /root/borgmatic-dump-sqlite3-freshrss-_-user
   - rm /root/borgmatic-dump-sqlite3-freshrss-alex-user
+  - rm /root/borgmatic-dump-sqlite3-mealie
   - rm /root/borgmatic-dump-sqlite3-hoarder-db
   - rm /root/borgmatic-dump-sqlite3-hoarder-queue
   - rm /root/borgmatic-dump-sqlite3-openwebui-db
