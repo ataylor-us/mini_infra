@@ -7,7 +7,7 @@ memos_version: 0.24.2
 local_borg_repo_path: /mnt/mini-borg-repo
 immich_redis_version: 6.2-alpine
 immich_postgres_version: pg14-v0.2.0
-immich_server_version: v1.130.2
+immich_server_version: v1.130.3
 hoarder_meilisearch_version: v1.11.1
 hoarder_server_version: release
 hoarder_chrome_version: 123
