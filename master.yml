@@ -8,6 +8,7 @@
     - role: credentials
     - role: reverse_proxy
     - role: backups
+    - role: vms
     - role: admin
     - role: version_control
     - role: photos
