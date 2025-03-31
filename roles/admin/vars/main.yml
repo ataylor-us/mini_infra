@@ -2,7 +2,6 @@
 packages:
   - cockpit
   - cockpit-podman
-  - cockpit-machines
 services:
   - cockpit.socket
   - podman.socket
