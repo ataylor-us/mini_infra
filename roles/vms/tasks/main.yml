@@ -1,3 +1,0 @@
----
-- name: Install packages
-  ansible.builtin.import_tasks: common/tasks/install_packages.yml
