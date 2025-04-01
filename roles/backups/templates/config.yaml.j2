@@ -14,10 +14,10 @@ encryption_passphrase: '{{ borg_passphrase }}'
 archive_name_format: '{hostname}-{now:%Y-%m-%d-%H%M%S}'
 retries: 5
 retry_wait: 5
-keep_within: 10d
+keep_within: 5d
 keep_daily: 4
-keep_weekly: 2
-keep_monthly: 1
+keep_weekly: 3
+keep_monthly: 0
 keep_yearly: 0
 before_backup:
   - podman exec -u postgres:postgres -t immich-postgres pg_dumpall > /root/borgmatic-dump-immich-postgres
