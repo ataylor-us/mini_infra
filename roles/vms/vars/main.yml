@@ -1,5 +1,5 @@
 ---
 packages:
   - libvirt
-services:
+enabled_services:
   - libvirtd.socket
