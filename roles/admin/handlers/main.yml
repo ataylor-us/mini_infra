@@ -1,0 +1,12 @@
+---
+- name: Reload systemd for cockpit
+  ansible.builtin.systemd:
+    daemon_reload: true
+  become: true
+  changed_when: true
+- name: Restart cockpit
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: restarted
+  become: true
+  loop: "{{ services }}"

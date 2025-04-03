@@ -7,3 +7,24 @@
     mode: "0644"
     owner: root
     src: cockpit.conf.j2
+- name: Ensure /etc/systemd/system/cockpit.socket.d/ directory exists
+  become: true
+  ansible.builtin.file:
+    path: /etc/systemd/system/cockpit.socket.d/
+    state: directory
+    mode: "0755"
+- name: Write configuration to listen.conf
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/cockpit.socket.d/listen.conf
+    content: |
+      [Socket]
+      ListenStream=127.0.0.0
+    owner: root
+    group: root
+    mode: "0644"
+  notify:
+    - Reload systemd for cockpit
+    - Restart cockpit
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
