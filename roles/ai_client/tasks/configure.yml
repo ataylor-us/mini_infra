@@ -8,7 +8,7 @@
     quadlet_filename: open-webui-container
     network: slirp4netns
     ports:
-      - 8084:8080
+      - 127.0.0.1:{{ open_webui_port }}:8080
     volumes:
       - /var/opt/open-webui:/app/backend/data:rw
     quadlet_options:
