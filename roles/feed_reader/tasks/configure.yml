@@ -8,7 +8,7 @@
     quadlet_filename: freshrss-container
     network: slirp4netns
     ports:
-      - 8083:80
+      - 127.0.0.1:{{ freshrss_port }}:80
     volumes:
       - /var/opt/freshrss:/config:rw
     env:

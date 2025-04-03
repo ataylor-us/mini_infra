@@ -15,3 +15,11 @@ open_webui_version: main
 plex_version: latest
 forgejo_version: 9
 caddy_url: https://caddyserver.com/api/download?os=linux&arch=amd64&p=github.com%2Fcaddy-dns%2Fcloudflare
+freshrss_port: 10001
+syncthing_port: 10002
+immich_port: 10003
+hoarder_port: 10004
+mailrise_port: 10005
+open_webui_port: 10006
+forgejo_port: 10007
+memos_port: 10008

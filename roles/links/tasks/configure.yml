@@ -65,7 +65,8 @@
     state: quadlet
     quadlet_filename: hoarder-server-container
     network: hoarder
-    ports: 3000:3000
+    ports:
+      - 127.0.0.1:{{ hoarder_port }}:3000
     stop_time: 30
     volumes:
       - /var/opt/hoarder-server:/data

@@ -1,6 +1,6 @@
 account default
 host localhost
-port 8025
+port {{ mailrise_port }}
 from {{ inventory_hostname }}@{{ mailrise_domain }}
 syslog LOG_MAIL
 aliases /etc/aliases
