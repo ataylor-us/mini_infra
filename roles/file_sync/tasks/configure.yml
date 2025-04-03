@@ -9,7 +9,7 @@
     quadlet_filename: syncthing-container
     network: slirp4netns
     ports:
-      - 8384:8384
+      - 127.0.0.1:{{ syncthing_port }}:8384
     volumes:
       - /var/opt/syncthing:/config:rw
     env:

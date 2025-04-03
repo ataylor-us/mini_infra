@@ -7,7 +7,7 @@
     state: quadlet
     quadlet_filename: memos-container
     ports:
-      - 5230:5230
+      - 127.0.0.1:{{ memos_port }}:5230
     network: slirp4netns
     volumes:
       - /var/opt/memos:/var/opt/memos:rw

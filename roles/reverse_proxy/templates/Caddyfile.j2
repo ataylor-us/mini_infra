@@ -10,22 +10,22 @@
 # immich
 photos.{{ domain_name }} {
   import cloudflare
-  reverse_proxy {{ local_tailnet_name }}:2283
+  reverse_proxy localhost:{{ immich_port }}
 }
 # freshrss
 feeds.{{ domain_name }} {
   import cloudflare
-  reverse_proxy {{ local_tailnet_name }}:8083
+  reverse_proxy localhost:{{ freshrss_port }}
 }
 # memos
 blog.{{ domain_name }} {
   import cloudflare
-  reverse_proxy {{ local_tailnet_name }}:5230
+  reverse_proxy localhost:{{ memos_port }}
 }
 # forgejo
 git.{{ domain_name }} {
   import cloudflare
-  reverse_proxy {{ local_tailnet_name }}:8700
+  reverse_proxy localhost:{{ forgejo_port }}
 }
 # plex
 plex.{{ domain_name }} {
@@ -37,17 +37,17 @@ plex.{{ domain_name }} {
     Referrer-Policy no-referrer-when-downgrade
     X-XSS-Protection 1
   }
-  reverse_proxy {{ local_tailnet_name }}:32400
+  reverse_proxy localhost:32400
 }
 # syncthing
 sync.{{ domain_name }} {
   import cloudflare
-  reverse_proxy {{ local_tailnet_name }}:8384
+  reverse_proxy localhost:{{ syncthing_port }}
 }
 # cockpit
 server.{{ domain_name }} {
   import cloudflare
-  reverse_proxy {{ local_tailnet_name }}:9090 {
+  reverse_proxy localhost:9090 {
     transport http {
       tls_insecure_skip_verify
     }
@@ -56,10 +56,10 @@ server.{{ domain_name }} {
 # hoarder
 links.{{ domain_name }} {
   import cloudflare
-  reverse_proxy {{ local_tailnet_name }}:3000
+  reverse_proxy localhost:{{ hoarder_port }}
 }
 # open-webui
 chat.{{ domain_name }} {
   import cloudflare
-  reverse_proxy {{ local_tailnet_name }}:8084
+  reverse_proxy localhost:{{ open_webui_port }}
 }

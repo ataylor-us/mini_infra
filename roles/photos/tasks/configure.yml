@@ -61,7 +61,7 @@
     state: quadlet
     quadlet_filename: immich-server-container
     ports:
-      - 2283:2283
+      - 127.0.0.1:{{ immich_port }}:2283
     network: immich
     volumes:
       - /etc/localtime:/etc/localtime:ro

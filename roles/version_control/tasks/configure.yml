@@ -11,7 +11,7 @@
       USE_UID: 1000
       USE_GID: 1000
     ports:
-      - 8700:3000
+      - 127.0.0.1:{{ forgejo_port }}:3000
     volumes:
       - /var/opt/forgejo:/data:rw
       - /etc/localtime:/etc/localtime:ro
