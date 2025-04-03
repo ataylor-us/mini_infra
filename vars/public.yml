@@ -23,3 +23,4 @@ mailrise_port: 10005
 open_webui_port: 10006
 forgejo_port: 10007
 memos_port: 10008
+cockpit_port: 10009
