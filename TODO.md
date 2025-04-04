@@ -3,4 +3,4 @@
 - [ ] Ensure firewalld removal
 - [ ] Test SELinux (or enforce disabling)
 - [ ] Add tailscale config
-- [ ] Migrate mealie to separate box
+- [ ] add vm template
