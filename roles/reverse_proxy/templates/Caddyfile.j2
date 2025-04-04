@@ -58,8 +58,3 @@ links.{{ domain_name }} {
   import cloudflare
   reverse_proxy localhost:{{ hoarder_port }}
 }
-# open-webui
-chat.{{ domain_name }} {
-  import cloudflare
-  reverse_proxy localhost:{{ open_webui_port }}
-}
