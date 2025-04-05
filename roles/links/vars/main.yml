@@ -2,6 +2,6 @@
 packages:
   - podman
 services:
-  - hoarder-server-container.service
-  - hoarder-chrome-container.service
-  - hoarder-meilisearch-container.service
+  - karakeep-server-container.service
+  - karakeep-chrome-container.service
+  - karakeep-meilisearch-container.service
