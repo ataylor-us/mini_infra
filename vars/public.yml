@@ -6,9 +6,9 @@ local_borg_repo_path: /mnt/mini-borg-repo
 immich_redis_version: 6.2-alpine
 immich_postgres_version: pg14-v0.2.0
 immich_server_version: v1.131.3
-hoarder_meilisearch_version: v1.11.1
-hoarder_server_version: release
-hoarder_chrome_version: 123
+karakeep_meilisearch_version: v1.11.1
+karakeep_server_version: 0.23.1
+karakeep_chrome_version: 123
 mailrise_domain: mailrise
 mailrise_version: latest
 open_webui_version: main
@@ -18,7 +18,7 @@ caddy_url: https://caddyserver.com/api/download?os=linux&arch=amd64&p=github.com
 freshrss_port: 10001
 syncthing_port: 10002
 immich_port: 10003
-hoarder_port: 10004
+karakeep_port: 10004
 mailrise_port: 10005
 open_webui_port: 10006
 forgejo_port: 10007

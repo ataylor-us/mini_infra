@@ -1,10 +1,10 @@
 ---
-- name: Reload systemd for hoarder
+- name: Reload systemd for karakeep
   ansible.builtin.systemd:
     daemon_reload: true
   become: true
   changed_when: true
-- name: Restart hoarder
+- name: Restart karakeep
   ansible.builtin.systemd:
     name: "{{ item }}"
     state: restarted

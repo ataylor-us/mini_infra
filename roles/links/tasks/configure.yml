@@ -1,24 +1,24 @@
 ---
-- name: Ensure hoarder network is created
+- name: Ensure karakeep network is created
   become: true
   containers.podman.podman_network:
-    name: hoarder
+    name: karakeep
     state: present
 - name: Create a Quadlet file
   become: true
   containers.podman.podman_container:
-    name: hoarder-meilisearch
-    image: docker.io/getmeili/meilisearch:{{ hoarder_meilisearch_version }}
+    name: karakeep-meilisearch
+    image: docker.io/getmeili/meilisearch:{{ karakeep_meilisearch_version }}
     state: quadlet
-    quadlet_filename: hoarder-meilisearch-container
-    network: hoarder
+    quadlet_filename: karakeep-meilisearch-container
+    network: karakeep
     volumes:
-      - /var/opt/hoarder-meilisearch:/meili_data:rw
+      - /var/opt/karakeep-meilisearch:/meili_data:rw
     env:
       MEILI_NO_ANALYTICS: "true"
       HOARDER_VERSION: release
-      NEXTAUTH_SECRET: "{{ hoarder_nextauth_secret }}"
-      MEILI_MASTER_KEY: "{{ hoarder_meili_master_key }}"
+      NEXTAUTH_SECRET: "{{ karakeep_nextauth_secret }}"
+      MEILI_MASTER_KEY: "{{ karakeep_meili_master_key }}"
       NEXTAUTH_URL: http://localhost:3000
     quadlet_options:
       - AutoUpdate=registry
@@ -29,16 +29,16 @@
         [Install]
         WantedBy=default.target
   notify:
-    - Reload systemd for hoarder
-    - Restart hoarder
+    - Reload systemd for karakeep
+    - Restart karakeep
 - name: Create a Quadlet file
   become: true
   containers.podman.podman_container:
-    name: hoarder-chrome
-    image: gcr.io/zenika-hub/alpine-chrome:{{ hoarder_chrome_version }}
+    name: karakeep-chrome
+    image: gcr.io/zenika-hub/alpine-chrome:{{ karakeep_chrome_version }}
     state: quadlet
-    quadlet_filename: hoarder-chrome-container
-    network: hoarder
+    quadlet_filename: karakeep-chrome-container
+    network: karakeep
     command:
       - --no-sandbox
       - --disable-gpu
@@ -55,29 +55,29 @@
         [Install]
         WantedBy=default.target
   notify:
-    - Reload systemd for hoarder
-    - Restart hoarder
+    - Reload systemd for karakeep
+    - Restart karakeep
 - name: Create a Quadlet file
   become: true
   containers.podman.podman_container:
-    name: hoarder-server
-    image: ghcr.io/hoarder-app/hoarder:{{ hoarder_server_version }}
+    name: karakeep-server
+    image: ghcr.io/karakeep-app/karakeep:{{ karakeep_server_version }}
     state: quadlet
-    quadlet_filename: hoarder-server-container
-    network: hoarder
+    quadlet_filename: karakeep-server-container
+    network: karakeep
     ports:
-      - 127.0.0.1:{{ hoarder_port }}:3000
+      - 127.0.0.1:{{ karakeep_port }}:3000
     stop_time: 30
     volumes:
-      - /var/opt/hoarder-server:/data
+      - /var/opt/karakeep-server:/data
     env:
       HOARDER_VERSION: release
-      NEXTAUTH_SECRET: "{{ hoarder_nextauth_secret }}"
-      MEILI_MASTER_KEY: "{{ hoarder_meili_master_key }}"
+      NEXTAUTH_SECRET: "{{ karakeep_nextauth_secret }}"
+      MEILI_MASTER_KEY: "{{ karakeep_meili_master_key }}"
       NEXTAUTH_URL: http://localhost:3000
-      MEILI_ADDR: http://hoarder-meilisearch:7700
-      BROWSER_WEB_URL: http://hoarder-chrome:9222
-      OPENAI_API_KEY: "{{ hoarder_openai_key }}"
+      MEILI_ADDR: http://karakeep-meilisearch:7700
+      BROWSER_WEB_URL: http://karakeep-chrome:9222
+      OPENAI_API_KEY: "{{ karakeep_openai_key }}"
       DATA_DIR: /data
       CRAWLER_FULL_PAGE_SCREENSHOT: "true"
       CRAWLER_FULL_PAGE_ARCHIVE: "true"
@@ -90,11 +90,11 @@
       - |
         [Unit]
         [Unit]
-        After=hoarder-chrome.service hoarder-meilisearch.service network-online.target nss-lookup.target
+        After=karakeep-chrome.service karakeep-meilisearch.service network-online.target nss-lookup.target
         [Install]
         WantedBy=default.target
   notify:
-    - Reload systemd for hoarder
-    - Restart hoarder
+    - Reload systemd for karakeep
+    - Restart karakeep
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers

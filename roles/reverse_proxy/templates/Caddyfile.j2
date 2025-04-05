@@ -53,8 +53,8 @@ server.{{ domain_name }} {
     }
   }
 }
-# hoarder
+# karakeep
 links.{{ domain_name }} {
   import cloudflare
-  reverse_proxy localhost:{{ hoarder_port }}
+  reverse_proxy localhost:{{ karakeep_port }}
 }
