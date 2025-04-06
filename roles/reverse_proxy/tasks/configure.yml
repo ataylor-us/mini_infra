@@ -1,32 +1,4 @@
 ---
-- name: Add system user
-  become: true
-  ansible.builtin.user:
-    name: caddy
-    shell: /usr/bin/nologin
-    system: true
-    create_home: true
-    home: /var/lib/caddy
-- name: Add caddy binary
-  become: true
-  ansible.builtin.get_url:
-    url: "{{ caddy_url }}"
-    dest: /usr/local/bin/caddy_linux_amd64_custom
-    mode: "0755"
-    group: root
-    owner: root
-    force: true
-  notify: Restart caddy
-- name: Caddy systemd unit
-  become: true
-  notify:
-    - Reload systemd for caddy
-  ansible.builtin.copy:
-    dest: /etc/systemd/system/caddy-custom.service
-    group: root
-    mode: "0644"
-    owner: root
-    src: caddy-custom.service
 - name: Create caddy config directory
   become: true
   ansible.builtin.file:
@@ -44,5 +16,26 @@
     mode: "0644"
     owner: root
   notify: Restart caddy
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: caddy
+    image: ghcr.io/caddybuilds/caddy-cloudflare:{{ caddy_version }}
+    state: quadlet
+    quadlet_filename: caddy-container
+    network: host
+    volumes:
+      - /etc/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        After=network-online.target nss-lookup.target
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for caddy
+    - Restart caddy
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
