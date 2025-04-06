@@ -26,6 +26,8 @@
     network: host
     volumes:
       - /etc/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - /var/opt/caddy/config:/config:rw
+      - /var/opt/caddy/data:/data:rw
     quadlet_options:
       - AutoUpdate=registry
       - Pull=always
