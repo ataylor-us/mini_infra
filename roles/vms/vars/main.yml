@@ -1,5 +1,6 @@
 ---
 packages:
   - libvirt
+  - virtiofsd
 enabled_services:
   - libvirtd.socket
