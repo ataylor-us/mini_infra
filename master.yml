@@ -19,6 +19,7 @@
     - role: notifications
     - role: private
     - role: links
+    - role: food_erp
   tasks:
     - name: Add podman cleanup job
       become: true
