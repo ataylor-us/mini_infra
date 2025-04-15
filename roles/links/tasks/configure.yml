@@ -12,6 +12,8 @@
     state: quadlet
     quadlet_filename: karakeep-meilisearch-container
     network: karakeep
+    ports:
+      - 127.0.0.1:{{ karakeep_meili_port }}:7700
     volumes:
       - /var/opt/karakeep-meilisearch:/meili_data:rw
     env:
@@ -75,7 +77,7 @@
       NEXTAUTH_SECRET: "{{ karakeep_nextauth_secret }}"
       MEILI_MASTER_KEY: "{{ karakeep_meili_master_key }}"
       NEXTAUTH_URL: http://localhost:3000
-      MEILI_ADDR: http://karakeep-meilisearch:7700
+      MEILI_ADDR: http://karakeep-meilisearch:{{ karakeep_meili_port }}
       BROWSER_WEB_URL: http://karakeep-chrome:9222
       OPENAI_API_KEY: "{{ karakeep_openai_key }}"
       DATA_DIR: /data

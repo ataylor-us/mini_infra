@@ -5,7 +5,7 @@ memos_version: 0.24.2
 immich_redis_version: 6.2-alpine
 immich_postgres_version: pg14-v0.2.0
 immich_server_version: v1.131.3
-karakeep_meilisearch_version: v1.11.1
+karakeep_meilisearch_version: v1.11.3
 karakeep_server_version: 0.23.2
 karakeep_chrome_version: 123
 mailrise_domain: mailrise
@@ -18,6 +18,7 @@ freshrss_port: 10001
 syncthing_port: 10002
 immich_port: 10003
 karakeep_port: 10004
+karakeep_meili_port: 7700
 mailrise_port: 10005
 open_webui_port: 10006
 forgejo_port: 10007
