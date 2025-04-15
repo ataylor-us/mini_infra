@@ -24,15 +24,8 @@ before_backup:
   - sqlite3 /var/opt/forgejo/gitea/gitea.db .dump > /root/borgmatic-dump-sqlite3-forgejo
   - sqlite3 /var/opt/freshrss/www/freshrss/data/users/alex/db.sqlite .dump > /root/borgmatic-dump-sqlite3-freshrss-_-user
   - sqlite3 /var/opt/freshrss/www/freshrss/data/users/_/db.sqlite .dump > /root/borgmatic-dump-sqlite3-freshrss-alex-user
-<<<<<<< HEAD
   - sqlite3 /var/opt/karakeep-server/db.db .dump > /root/borgmatic-dump-sqlite3-karakeep-db
   - sqlite3 /var/opt/karakeep-server/queue.db .dump > /root/borgmatic-dump-sqlite3-karakeep-queue
-=======
-  - sqlite3 /var/opt/hoarder-server/db.db .dump > /root/borgmatic-dump-sqlite3-hoarder-db
-  - sqlite3 /var/opt/hoarder-server/queue.db .dump > /root/borgmatic-dump-sqlite3-hoarder-queue
-  - sqlite3 /var/opt/open-webui/webui.db .dump > /root/borgmatic-dump-sqlite3-openwebui-db
-  - sqlite3 /var/opt/open-webui/vector_db/chroma.sqlite3 .dump > /root/borgmatic-dump-sqlite3-openwebui-chroma-db
->>>>>>> parent of dbea9db (Revert "added grocy borgmatic sqlite dump")
   - sqlite3 /var/opt/grocy/data/grocy.db .dump > /root/borgmatic-dump-sqlite3-grocy
 after_backup:
   - rm /root/borgmatic-dump-immich-postgres
@@ -40,13 +33,6 @@ after_backup:
   - rm /root/borgmatic-dump-sqlite3-forgejo
   - rm /root/borgmatic-dump-sqlite3-freshrss-_-user
   - rm /root/borgmatic-dump-sqlite3-freshrss-alex-user
-<<<<<<< HEAD
   - rm /root/borgmatic-dump-sqlite3-karakeep-db
   - rm /root/borgmatic-dump-sqlite3-karakeep-queue
-=======
-  - rm /root/borgmatic-dump-sqlite3-hoarder-db
-  - rm /root/borgmatic-dump-sqlite3-hoarder-queue
-  - rm /root/borgmatic-dump-sqlite3-openwebui-db
-  - rm /root/borgmatic-dump-sqlite3-openwebui-chroma-db
->>>>>>> parent of dbea9db (Revert "added grocy borgmatic sqlite dump")
   - rm /root/borgmatic-dump-sqlite3-grocy
