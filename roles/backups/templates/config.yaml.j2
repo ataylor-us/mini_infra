@@ -26,6 +26,7 @@ before_backup:
   - sqlite3 /var/opt/freshrss/www/freshrss/data/users/_/db.sqlite .dump > /root/borgmatic-dump-sqlite3-freshrss-alex-user
   - sqlite3 /var/opt/karakeep-server/db.db .dump > /root/borgmatic-dump-sqlite3-karakeep-db
   - sqlite3 /var/opt/karakeep-server/queue.db .dump > /root/borgmatic-dump-sqlite3-karakeep-queue
+  - sqlite3 /var/opt/grocy/data/grocy.db .dump > /root/borgmatic-dump-sqlite3-grocy
 after_backup:
   - rm /root/borgmatic-dump-immich-postgres
   - rm /root/borgmatic-dump-sqlite3-memos
@@ -34,3 +35,4 @@ after_backup:
   - rm /root/borgmatic-dump-sqlite3-freshrss-alex-user
   - rm /root/borgmatic-dump-sqlite3-karakeep-db
   - rm /root/borgmatic-dump-sqlite3-karakeep-queue
+  - rm /root/borgmatic-dump-sqlite3-grocy
