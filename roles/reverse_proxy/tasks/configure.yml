@@ -23,6 +23,7 @@
     image: ghcr.io/caddybuilds/caddy-cloudflare:{{ caddy_version }}
     state: quadlet
     quadlet_filename: caddy-container
+    user: 1000:1000
     network: host
     volumes:
       - /etc/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
