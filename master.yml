@@ -17,7 +17,6 @@
     - role: media
     - role: file_sync
     - role: notifications
-    - role: private
     - role: links
   tasks:
     - name: Add podman cleanup job
