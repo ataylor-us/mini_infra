@@ -20,6 +20,8 @@
       - |
         [Unit]
         After=network-online.target nss-lookup.target
+        [Service]
+        Restart=always
         [Install]
         WantedBy=default.target
   notify:
@@ -48,6 +50,8 @@
         Exec=postgres -c shared_preload_libraries='vectors.so' -c search_path='"$user", public, vectors' -c max_wal_size=2GB -c shared_buffers=512MB -c wal_compression=on
         [Unit]
         After=immich-redis.service network-online.target nss-lookup.target
+        [Service]
+        Restart=always
         [Install]
         WantedBy=default.target
   notify:
@@ -80,6 +84,8 @@
       - |
         [Unit]
         After=immich-machine-learning.service immich-redis-container.service immich-postgres-container.service network-online.target nss-lookup.target
+        [Service]
+        Restart=always
         [Install]
         WantedBy=default.target
   notify:
@@ -101,6 +107,8 @@
       - |
         [Unit]
         After=network-online.target nss-lookup.target
+        [Service]
+        Restart=always
         [Install]
         WantedBy=default.target
   notify:

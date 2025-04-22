@@ -28,6 +28,8 @@
       - |
         [Unit]
         After=network-online.target nss-lookup.target
+        [Service]
+        Restart=always
         [Install]
         WantedBy=default.target
   notify:
@@ -54,6 +56,8 @@
       - |
         [Unit]
         After=network-online.target nss-lookup.target
+        [Service]
+        Restart=always
         [Install]
         WantedBy=default.target
   notify:
@@ -93,6 +97,8 @@
         [Unit]
         [Unit]
         After=karakeep-chrome.service karakeep-meilisearch.service network-online.target nss-lookup.target
+        [Service]
+        Restart=always
         [Install]
         WantedBy=default.target
   notify:
