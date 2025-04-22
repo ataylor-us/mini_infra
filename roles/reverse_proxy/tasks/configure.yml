@@ -35,6 +35,8 @@
       - |
         [Unit]
         After=network-online.target nss-lookup.target
+        [Service]
+        Restart=always
         [Install]
         WantedBy=default.target
   notify:
