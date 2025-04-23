@@ -8,7 +8,7 @@
   become: true
   containers.podman.podman_container:
     name: immich-redis
-    image: docker.io/library/redis:{{ immich_redis_version }}
+    image: docker.io/valkey/valkey:{{ immich_redis_version }}
     state: quadlet
     quadlet_filename: immich-redis-container
     network: immich
@@ -95,7 +95,8 @@
   become: true
   containers.podman.podman_container:
     name: immich-machine-learning
-    image: ghcr.io/immich-app/immich-machine-learning:{{ immich_server_version }}
+#   image: ghcr.io/immich-app/immich-machine-learning:{{ immich_server_version }}
+    image: ghcr.io/immich-app/immich-machine-learning:v1.132.0
     state: quadlet
     quadlet_filename: immich-machine-learning-container
     network: immich
