@@ -34,7 +34,7 @@ plex.{{ domain_name }} {
     Referrer-Policy no-referrer-when-downgrade
     X-XSS-Protection 1
   }
-  reverse_proxy localhost:32400
+  reverse_proxy localhost:{{ plex_port }}
 }
 # syncthing
 sync.{{ domain_name }} {

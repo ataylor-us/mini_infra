@@ -5,7 +5,7 @@
     rule: allow
     proto: tcp
     src: "{{ local_subnet }}"
-    port: "32400"
+    port: "{{ plex_port }}"
     comment: Plex
 - name: Create a Quadlet file
   become: true
@@ -18,7 +18,7 @@
     device:
       - /dev/dri:/dev/dri
     ports:
-      - 32400:32400
+      - "{{ plex_port }}:32400"
     volumes:
       - /var/opt/plex:/config:rw
       - /mnt:/mnt:rw
