@@ -95,8 +95,7 @@
   become: true
   containers.podman.podman_container:
     name: immich-machine-learning
-#   image: ghcr.io/immich-app/immich-machine-learning:{{ immich_server_version }}
-    image: ghcr.io/immich-app/immich-machine-learning:v1.132.0
+    image: ghcr.io/immich-app/immich-machine-learning:{{ immich_server_version }}
     state: quadlet
     quadlet_filename: immich-machine-learning-container
     network: immich
