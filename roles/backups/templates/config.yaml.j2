@@ -11,6 +11,7 @@ repositories:
 compression: auto,lzma,9
 encryption_passphrase: '{{ borg_passphrase }}'
 archive_name_format: '{hostname}-{now:%Y-%m-%d-%H%M%S}'
+read_special: true
 retries: 5
 retry_wait: 5
 keep_within: 10d
