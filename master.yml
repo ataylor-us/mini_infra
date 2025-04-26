@@ -14,7 +14,6 @@
     - role: photos
     - role: feed_reader
     - role: microblogging
-    - role: media
     - role: file_sync
     - role: notifications
     - role: links

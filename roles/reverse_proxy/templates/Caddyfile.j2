@@ -24,18 +24,6 @@ git.{{ domain_name }} {
   import cloudflare
   reverse_proxy localhost:{{ forgejo_port }}
 }
-# plex
-plex.{{ domain_name }} {
-  import cloudflare
-  header {
-    Strict-Transport-Security max-age=31536000;
-    X-Content-Type-Options nosniff
-    X-Frame-Options DENY
-    Referrer-Policy no-referrer-when-downgrade
-    X-XSS-Protection 1
-  }
-  reverse_proxy localhost:{{ plex_port }}
-}
 # syncthing
 sync.{{ domain_name }} {
   import cloudflare
