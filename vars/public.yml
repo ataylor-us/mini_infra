@@ -10,7 +10,6 @@ karakeep_server_version: 0.23.2
 karakeep_chrome_version: 123
 mailrise_domain: mailrise
 mailrise_version: latest
-plex_version: latest
 forgejo_version: 9
 caddy_version: 2.10.0
 freshrss_port: 10001
@@ -23,4 +22,3 @@ open_webui_port: 10006
 forgejo_port: 10007
 memos_port: 10008
 cockpit_port: 10009
-plex_port: 32400
