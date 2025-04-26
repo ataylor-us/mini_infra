@@ -17,6 +17,7 @@
     - role: file_sync
     - role: notifications
     - role: links
+    - role: media
   tasks:
     - name: Add podman cleanup job
       become: true

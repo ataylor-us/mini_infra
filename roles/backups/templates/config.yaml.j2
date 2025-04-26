@@ -18,6 +18,18 @@ keep_daily: 5
 keep_weekly: 4
 keep_monthly: 3
 keep_yearly: 2
+sqlite_databases:
+  - name: emby-displaypreferences
+    path: /var/opt/emby/data/displaypreferences.db
+  - name: emby-activitylog
+    path: /var/opt/emby/data/activitylog.db
+  - name: emby-users
+    path: /var/opt/emby/data/users.db
+  - name: emby-authentication
+    path: /var/opt/emby/data/authentication.db
+  - name: emby-library
+    path: /var/opt/emby/data/library.db
+# TODO move sqlite databases to above format
 commands:
     - before: action
       when: [create]

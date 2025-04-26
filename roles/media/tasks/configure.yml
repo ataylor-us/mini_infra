@@ -1,0 +1,50 @@
+---
+- name: Allow Emby to local network
+  become: true
+  community.general.ufw:
+    rule: allow
+    proto: tcp
+    src: "{{ local_subnet }}"
+    port: "{{ emby_port }}"
+    comment: Emby
+- name: Create emby config directory
+  become: true
+  ansible.builtin.file:
+    group: 1000
+    mode: "0755"
+    owner: 1000
+    path: /var/opt/emby
+    state: directory
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: emby
+    image: lscr.io/linuxserver/emby:{{ emby_version }}
+    state: quadlet
+    hostname: "{{ inventory_hostname }}"
+    quadlet_filename: emby-container
+    device:
+      - /dev/dri:/dev/dri
+    network: host
+    volumes:
+      - /var/opt/emby:/config:rw
+      - /mnt:/mnt:ro
+    env:
+      PUID: 1000
+      PGID: 1000
+      TZ: America/New_York
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        After=network-online.target nss-lookup.target
+        [Service]
+        Restart=always
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for emby
+    - Restart emby
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
