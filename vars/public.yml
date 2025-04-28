@@ -5,7 +5,7 @@ memos_version: 0.24.2
 immich_redis_version: 8-bookworm
 immich_postgres_version: pg14-v0.2.0
 immich_server_version: v1.132.1
-karakeep_meilisearch_version: v1.11.3
+karakeep_meilisearch_version: v1.13.3
 karakeep_server_version: 0.23.2
 karakeep_chrome_version: 123
 mailrise_domain: mailrise
