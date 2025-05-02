@@ -4,3 +4,4 @@
 - [ ] Test SELinux (or enforce disabling)
 - [ ] Add tailscale config
 - [ ] add vm template
+- [ ] enforce smartd timeout override
