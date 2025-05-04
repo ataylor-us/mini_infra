@@ -1,10 +1,10 @@
 ---
-- name: Reload systemd for emby
+- name: Reload systemd for media
   ansible.builtin.systemd:
     daemon_reload: true
   become: true
   changed_when: true
-- name: Restart emby
+- name: Restart media
   ansible.builtin.systemd:
     name: "{{ item }}"
     state: restarted
