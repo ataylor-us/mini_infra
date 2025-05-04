@@ -112,6 +112,6 @@
     day: "*"
     month: "*"
     weekday: "*"
-    job: podman run --name plextraktsync --net=host -it --rm -v /var/opt/plextraktsync:/app/config -e PUID=1000 -e PGID=1000 -e TZ=America/New_York ghcr.io/taxel/plextraktsync sync >> /dev/null
+    job: podman run --name plextraktsync --net=host -t --rm -v /var/opt/plextraktsync:/app/config -e PUID=1000 -e PGID=1000 -e TZ=America/New_York ghcr.io/taxel/plextraktsync sync >> /dev/null
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
