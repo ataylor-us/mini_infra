@@ -103,5 +103,15 @@
   notify:
     - Reload systemd for media
     - Restart media
+- name: Add plextraktsync job
+  become: true
+  ansible.builtin.cron:
+    name: Sync Trakt with Plex
+    minute: "06"
+    hour: "*/6"
+    day: "*"
+    month: "*"
+    weekday: "*"
+    job: podman run --name plextraktsync --net=host -it --rm -v /var/opt/plextraktsync:/app/config -e PUID=1000 -e PGID=1000 -e TZ=America/New_York ghcr.io/taxel/plextraktsync sync >> /dev/null
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
