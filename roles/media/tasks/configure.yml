@@ -7,6 +7,14 @@
     src: "{{ local_subnet }}"
     port: "{{ emby_port }}"
     comment: Emby
+- name: Allow Plex to local network
+  become: true
+  community.general.ufw:
+    rule: allow
+    proto: tcp
+    src: "{{ local_subnet }}"
+    port: "{{ plex_port }}"
+    comment: Plex
 - name: Create emby config directory
   become: true
   ansible.builtin.file:
@@ -15,7 +23,15 @@
     owner: 1000
     path: /var/opt/emby
     state: directory
-- name: Create emby recordings directory
+- name: Create plex config directory
+  become: true
+  ansible.builtin.file:
+    group: 1000
+    mode: "0755"
+    owner: 1000
+    path: /var/opt/plex
+    state: directory
+- name: Create recordings directory
   become: true
   ansible.builtin.file:
     group: 1000
@@ -53,7 +69,39 @@
         [Install]
         WantedBy=default.target
   notify:
-    - Reload systemd for emby
-    - Restart emby
+    - Reload systemd for media
+    - Restart media
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: plex
+    image: lscr.io/linuxserver/plex:{{ plex_version }}
+    state: quadlet
+    quadlet_filename: plex-container
+    network: host
+    device:
+      - /dev/dri:/dev/dri
+    volumes:
+      - /var/opt/plex:/config:rw
+      - /mnt:/mnt:ro
+      - /mnt/Recordings:/mnt/Recordings:rw
+    env:
+      PUID: 1000
+      PGID: 1000
+      TZ: America/New_York
+      VERSION: docker
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        After=network-online.target nss-lookup.target
+        [Service]
+        Restart=always
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for media
+    - Restart media
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers

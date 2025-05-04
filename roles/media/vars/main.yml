@@ -3,3 +3,4 @@ packages:
   - podman
 services:
   - emby-container.service
+  - plex-container.service
