@@ -1,4 +1,5 @@
 ---
+mergerfs_rpm_url: "https://github.com/trapexit/mergerfs/releases/download/2.40.2/mergerfs-2.40.2-1.fc41.x86_64.rpm"
 freshrss_version: 1.26.2
 syncthing_version: 1.29.5
 memos_version: 0.24.2
