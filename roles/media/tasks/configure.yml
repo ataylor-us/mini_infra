@@ -125,8 +125,8 @@
   become: true
   ansible.builtin.cron:
     name: Sync Trakt & Plex
-    minute: "15"
-    hour: "*/1"
+    minute: "*/13"
+    hour: "*"
     day: "*"
     month: "*"
     weekday: "*"
