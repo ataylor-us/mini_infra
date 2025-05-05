@@ -93,15 +93,43 @@
   notify:
     - Reload systemd for media
     - Restart media
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: plextraktsync
+    image: ghcr.io/taxel/plextraktsync:{{ plextraktsync_version }}
+    state: quadlet
+    quadlet_filename: plextraktsync-container
+    network: host
+    command: watch
+    env:
+      PUID: 1000
+      PGID: 1000
+      TZ: America/New_York
+    volumes:
+      - /var/opt/plextraktsync:/app/config:rw
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        After=network-online.target nss-lookup.target
+        [Service]
+        Restart=always
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for media
+    - Restart media
 - name: Add plextraktsync job
   become: true
   ansible.builtin.cron:
-    name: Sync Trakt with Plex
-    minute: "06"
-    hour: "*/6"
+    name: Sync Trakt & Plex
+    minute: "15"
+    hour: "*/1"
     day: "*"
     month: "*"
     weekday: "*"
-    job: podman run --name plextraktsync --net=host -t --rm -v /var/opt/plextraktsync:/app/config -e PUID=1000 -e PGID=1000 -e TZ=America/New_York ghcr.io/taxel/plextraktsync sync >> /dev/null
+    job: podman exec -t -e PUID=1000 -e PGID=1000 -e TZ=America/New_York plextraktsync plextraktsync sync >> /dev/null
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
