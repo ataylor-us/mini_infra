@@ -4,3 +4,4 @@ packages:
 services:
   - emby-container.service
   - plex-container.service
+  - plextraktsync-container.service
