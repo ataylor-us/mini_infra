@@ -45,6 +45,7 @@
     volumes:
       - /var/opt/emby:/config:rw
       - /mnt:/mnt:ro
+      - /mnt/YouTube:/mnt/YouTube:rw
     env:
       PUID: 1000
       PGID: 1000
@@ -75,6 +76,7 @@
     volumes:
       - /var/opt/plex:/config:rw
       - /mnt:/mnt:ro
+      - /mnt/YouTube:/mnt/YouTube:rw
     env:
       PUID: 1000
       PGID: 1000
