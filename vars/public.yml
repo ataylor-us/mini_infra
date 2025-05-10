@@ -14,6 +14,7 @@ forgejo_version: 9
 caddy_version: 2.10.0
 emby_version: 4.8.11
 plex_version: latest
+jellyfin_version: latest
 plextraktsync_version: latest
 freshrss_port: 10001
 syncthing_port: 10002
@@ -27,3 +28,4 @@ memos_port: 10008
 cockpit_port: 10009
 emby_port: 8097
 plex_port: 32400
+jellyfin_port: 8096
