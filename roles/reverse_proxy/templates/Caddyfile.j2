@@ -48,6 +48,11 @@ media.{{ domain_name }} {
   import cloudflare
   reverse_proxy localhost:{{ emby_port }}
 }
+# jellyfin
+media2.{{ domain_name }} {
+  import cloudflare
+  reverse_proxy localhost:{{ jellyfin_port }}
+}
 # plex
 plex.{{ domain_name }} {
   import cloudflare
