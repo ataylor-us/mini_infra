@@ -30,6 +30,10 @@ sqlite_databases:
     path: /var/opt/emby/data/authentication.db
   - name: emby-library
     path: /var/opt/emby/data/library.db
+  - name: jellyfin
+    path: /var/opt/jellyfin/data/data/jellyfin.db
+  - name: jellyfin-library
+    path: /var/opt/jellyfin/data/data/library.db
 # TODO move sqlite databases to above format
 commands:
     - before: action
