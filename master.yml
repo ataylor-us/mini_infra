@@ -5,6 +5,7 @@
     - vars/public.yml
     - vars/vault.yml
   roles:
+    - role: system
     - role: credentials
     - role: reverse_proxy
     - role: backups
