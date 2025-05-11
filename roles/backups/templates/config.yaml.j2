@@ -45,13 +45,7 @@ sqlite_databases:
     path: /var/opt/karakeep-server/db.db
   - name: karakeep-queue
     path: /var/opt/karakeep-server/queue.db
-commands:
-    - before: action
-      when: [create]
-      run:
-          - podman exec -u postgres:postgres -t immich-postgres pg_dumpall > /root/borgmatic-dump-immich-postgres
-    - after: action
-      when:
-          - create
-      run:
-          - rm /root/borgmatic-dump-immich-postgres
+postgresql_databases:
+  - name: all
+    username: postgres
+    pg_dump_command: podman exec immich-postgres pg_dumpall
