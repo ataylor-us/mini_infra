@@ -1,0 +1,25 @@
+---
+- name: Set timezone to America/New_York
+  become: true
+  community.general.timezone:
+    name: America/New_York
+- ansible.builtin.replace:
+    group: root
+    mode: '0440'
+    owner: root
+    path: /etc/sudoers
+    regexp: (^Defaults.*mail_badpass$)|(\,mail_badpass)
+    replace: ''
+    validate: /usr/sbin/visudo -cf %s
+  become: true
+  name: Remove mail_badpass from sudoers
+- become: true
+  copy:
+    content: |
+      Defaults        pwfeedback      
+    dest: /etc/sudoers.d/02-pwfeedback
+    group: root
+    mode: '0440'
+    owner: root
+    validate: /usr/sbin/visudo -cf %s
+  name: Adding pwfeedback
