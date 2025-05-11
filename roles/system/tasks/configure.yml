@@ -3,23 +3,23 @@
   become: true
   community.general.timezone:
     name: America/New_York
-- ansible.builtin.replace:
+- name: Remove mail_badpass from sudoers
+  ansible.builtin.replace:
     group: root
-    mode: '0440'
+    mode: "0440"
     owner: root
     path: /etc/sudoers
     regexp: (^Defaults.*mail_badpass$)|(\,mail_badpass)
-    replace: ''
+    replace: ""
     validate: /usr/sbin/visudo -cf %s
   become: true
-  name: Remove mail_badpass from sudoers
-- become: true
-  copy:
+- ansible.builtin.copy:
     content: |
-      Defaults        pwfeedback      
+      Defaults        pwfeedback
     dest: /etc/sudoers.d/02-pwfeedback
     group: root
-    mode: '0440'
+    mode: "0440"
     owner: root
     validate: /usr/sbin/visudo -cf %s
   name: Adding pwfeedback
+  become: true
