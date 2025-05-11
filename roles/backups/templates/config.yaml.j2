@@ -34,26 +34,25 @@ sqlite_databases:
     path: /var/opt/jellyfin/data/data/jellyfin.db
   - name: jellyfin-library
     path: /var/opt/jellyfin/data/data/library.db
-# TODO move sqlite databases to above format
+  - name: memos
+    path: /var/opt/memos/memos_prod.db
+  - name: gitea
+    path: /var/opt/forgejo/gitea/gitea.db
+  - name: freshrss-alex
+    path: /var/opt/freshrss/www/freshrss/data/users/alex/db.sqlite
+  - name: freshrss-_
+    path: /var/opt/freshrss/www/freshrss/data/users/_/db.sqlite
+  - name: karakeep-db
+    path: /var/opt/karakeep-server/db.db
+  - name: karakeep-queue
+    path: /var/opt/karakeep-server/queue.db
 commands:
     - before: action
       when: [create]
       run:
           - podman exec -u postgres:postgres -t immich-postgres pg_dumpall > /root/borgmatic-dump-immich-postgres
-          - sqlite3 /var/opt/memos/memos_prod.db .dump > /root/borgmatic-dump-sqlite3-memos
-          - sqlite3 /var/opt/forgejo/gitea/gitea.db .dump > /root/borgmatic-dump-sqlite3-forgejo
-          - sqlite3 /var/opt/freshrss/www/freshrss/data/users/alex/db.sqlite .dump > /root/borgmatic-dump-sqlite3-freshrss-_-user
-          - sqlite3 /var/opt/freshrss/www/freshrss/data/users/_/db.sqlite .dump > /root/borgmatic-dump-sqlite3-freshrss-alex-user
-          - sqlite3 /var/opt/karakeep-server/db.db .dump > /root/borgmatic-dump-sqlite3-karakeep-db
-          - sqlite3 /var/opt/karakeep-server/queue.db .dump > /root/borgmatic-dump-sqlite3-karakeep-queue
     - after: action
       when:
           - create
       run:
           - rm /root/borgmatic-dump-immich-postgres
-          - rm /root/borgmatic-dump-sqlite3-memos
-          - rm /root/borgmatic-dump-sqlite3-forgejo
-          - rm /root/borgmatic-dump-sqlite3-freshrss-_-user
-          - rm /root/borgmatic-dump-sqlite3-freshrss-alex-user
-          - rm /root/borgmatic-dump-sqlite3-karakeep-db
-          - rm /root/borgmatic-dump-sqlite3-karakeep-queue
