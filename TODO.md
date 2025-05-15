@@ -6,3 +6,4 @@
 - [ ] add vm template
 - [ ] enforce smartd timeout override
 - [ ] open syncthing port
+- [ ] libvirt service doesnt need to be started (only socket?)
