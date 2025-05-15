@@ -1,7 +1,6 @@
 ---
 freshrss_version: 1.26.2
 syncthing_version: 1.29.6
-memos_version: 0.24.2
 immich_redis_version: 8-bookworm
 immich_postgres_version: pg14-v0.2.0
 immich_server_version: v1.132.3
@@ -24,7 +23,6 @@ karakeep_meili_port: 7700
 mailrise_port: 10005
 open_webui_port: 10006
 forgejo_port: 10007
-memos_port: 10008
 cockpit_port: 10009
 emby_port: 8097
 plex_port: 32400
