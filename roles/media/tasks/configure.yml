@@ -22,7 +22,7 @@
     proto: tcp
     src: "{{ local_subnet }}"
     port: "{{ jellyfin_port }}"
-    comment: Emby
+    comment: Jellyfin
 - name: Create emby config directory
   become: true
   ansible.builtin.file:
