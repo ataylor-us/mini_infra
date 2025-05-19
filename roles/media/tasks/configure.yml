@@ -31,6 +31,14 @@
     owner: 1000
     path: /var/opt/emby
     state: directory
+- name: Create Recordings directory
+  become: true
+  ansible.builtin.file:
+    group: 1000
+    mode: "0755"
+    owner: 1000
+    path: /mnt/Recordings
+    state: directory
 #- name: Create plex config directory
 #  become: true
 #  ansible.builtin.file:
@@ -62,6 +70,7 @@
       - /var/opt/emby:/config:rw
       - /mnt:/mnt:ro
       - /mnt/YouTube:/mnt/YouTube:rw
+      - /mnt/Recordings:/mnt/Recordings:rw
     env:
       PUID: 1000
       PGID: 1000
