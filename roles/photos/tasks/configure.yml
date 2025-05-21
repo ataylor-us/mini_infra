@@ -31,7 +31,7 @@
   become: true
   containers.podman.podman_container:
     name: immich-postgres
-    image: docker.io/tensorchord/pgvecto-rs:{{ immich_postgres_version }}
+    image: ghcr.io/immich-app/postgres:{{ immich_postgres_version }}
     state: quadlet
     quadlet_filename: immich-postgres-container
     network: immich
@@ -46,8 +46,6 @@
       - AutoUpdate=registry
       - Pull=always
       - |
-        [Container]
-        Exec=postgres -c shared_preload_libraries='vectors.so' -c search_path='"$user", public, vectors' -c max_wal_size=2GB -c shared_buffers=512MB -c wal_compression=on
         [Unit]
         After=immich-redis.service network-online.target nss-lookup.target
         [Service]
