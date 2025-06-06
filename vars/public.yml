@@ -12,7 +12,7 @@ mailrise_domain: mailrise
 mailrise_version: latest
 forgejo_version: 9
 caddy_version: 2.10.0-alpine
-emby_version: 4.8.11
+emby_version: latest
 plex_version: 1.41.6
 jellyfin_version: 10.10.7
 plextraktsync_version: latest
