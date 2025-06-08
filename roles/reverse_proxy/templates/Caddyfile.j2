@@ -49,19 +49,19 @@ media.{{ domain_name }} {
   reverse_proxy localhost:{{ emby_port }}
 }
 # jellyfin
-#media2.{{ domain_name }} {
-#  import cloudflare
-#  reverse_proxy localhost:{{ jellyfin_port }}
-#}
+media2.{{ domain_name }} {
+  import cloudflare
+  reverse_proxy localhost:{{ jellyfin_port }}
+}
 # plex
-#plex.{{ domain_name }} {
-#  import cloudflare
-#  header {
-#    Strict-Transport-Security max-age=31536000;
-#    X-Content-Type-Options nosniff
-#    X-Frame-Options DENY
-#    Referrer-Policy no-referrer-when-downgrade
-#    X-XSS-Protection 1
-#  }
-#  reverse_proxy localhost:{{ plex_port }}
-#}
+plex.{{ domain_name }} {
+  import cloudflare
+  header {
+    Strict-Transport-Security max-age=31536000;
+    X-Content-Type-Options nosniff
+    X-Frame-Options DENY
+    Referrer-Policy no-referrer-when-downgrade
+    X-XSS-Protection 1
+  }
+  reverse_proxy localhost:{{ plex_port }}
+}

@@ -7,22 +7,22 @@
     src: "{{ local_subnet }}"
     port: "{{ emby_port }}"
     comment: Emby
-#- name: Allow Plex to local network
-#  become: true
-#  community.general.ufw:
-#    rule: allow
-#    proto: tcp
-#    src: "{{ local_subnet }}"
-#    port: "{{ plex_port }}"
-#    comment: Plex
-#- name: Allow Jellyfin to local network
-#  become: true
-#  community.general.ufw:
-#    rule: allow
-#    proto: tcp
-#    src: "{{ local_subnet }}"
-#    port: "{{ jellyfin_port }}"
-#    comment: Jellyfin
+- name: Allow Plex to local network
+  become: true
+  community.general.ufw:
+    rule: allow
+    proto: tcp
+    src: "{{ local_subnet }}"
+    port: "{{ plex_port }}"
+    comment: Plex
+- name: Allow Jellyfin to local network
+  become: true
+  community.general.ufw:
+    rule: allow
+    proto: tcp
+    src: "{{ local_subnet }}"
+    port: "{{ jellyfin_port }}"
+    comment: Jellyfin
 - name: Create emby config directory
   become: true
   ansible.builtin.file:
@@ -30,6 +30,14 @@
     mode: "0755"
     owner: 1000
     path: /var/opt/emby
+    state: directory
+- name: Create plex config directory
+  become: true
+  ansible.builtin.file:
+    group: 1000
+    mode: "0755"
+    owner: 1000
+    path: /var/opt/plex
     state: directory
 - name: Create Recordings directory
   become: true
@@ -39,22 +47,14 @@
     owner: 1000
     path: /mnt/Recordings
     state: directory
-#- name: Create plex config directory
-#  become: true
-#  ansible.builtin.file:
-#    group: 1000
-#    mode: "0755"
-#    owner: 1000
-#    path: /var/opt/plex
-#    state: directory
-#- name: Create jellyfin config directory
-#  become: true
-#  ansible.builtin.file:
-#    group: 1000
-#    mode: "0755"
-#    owner: 1000
-#    path: /var/opt/jellyfin
-#    state: directory
+- name: Create jellyfin config directory
+  become: true
+  ansible.builtin.file:
+    group: 1000
+    mode: "0755"
+    owner: 1000
+    path: /var/opt/jellyfin
+    state: directory
 - name: Create a Quadlet file
   become: true
   containers.podman.podman_container:
@@ -88,107 +88,107 @@
   notify:
     - Reload systemd for media
     - Restart media
-#- name: Create a Quadlet file
-#  become: true
-#  containers.podman.podman_container:
-#    name: jellyfin
-#    image: lscr.io/linuxserver/jellyfin:{{ jellyfin_version }}
-#    state: quadlet
-#    hostname: "{{ inventory_hostname }}"
-#    quadlet_filename: jellyfin-container
-#    device:
-#      - /dev/dri:/dev/dri
-#    network: host
-#    volumes:
-#      - /var/opt/jellyfin:/config:rw
-#      - /mnt:/mnt:ro
-#      - /mnt/YouTube:/mnt/YouTube:rw
-#    env:
-#      PUID: 1000
-#      PGID: 1000
-#      TZ: America/New_York
-#    quadlet_options:
-#      - AutoUpdate=registry
-#      - Pull=always
-#      - |
-#        [Unit]
-#        After=network-online.target nss-lookup.target
-#        [Service]
-#        Restart=always
-#        [Install]
-#        WantedBy=default.target
-#  notify:
-#    - Reload systemd for media
-#    - Restart media
-#- name: Create a Quadlet file
-#  become: true
-#  containers.podman.podman_container:
-#    name: plex
-#    image: lscr.io/linuxserver/plex:{{ plex_version }}
-#    state: quadlet
-#    quadlet_filename: plex-container
-#    network: host
-#    device:
-#      - /dev/dri:/dev/dri
-#    volumes:
-#      - /var/opt/plex:/config:rw
-#      - /mnt:/mnt:ro
-#      - /mnt/YouTube:/mnt/YouTube:rw
-#    env:
-#      PUID: 1000
-#      PGID: 1000
-#      TZ: America/New_York
-#      VERSION: docker
-#    quadlet_options:
-#      - AutoUpdate=registry
-#      - Pull=always
-#      - |
-#        [Unit]
-#        After=network-online.target nss-lookup.target
-#        [Service]
-#        Restart=always
-#        [Install]
-#        WantedBy=default.target
-#  notify:
-#    - Reload systemd for media
-#    - Restart media
-#- name: Create a Quadlet file
-#  become: true
-#  containers.podman.podman_container:
-#    name: plextraktsync
-#    image: ghcr.io/taxel/plextraktsync:{{ plextraktsync_version }}
-#    state: quadlet
-#    quadlet_filename: plextraktsync-container
-#    network: host
-#    command: watch
-#    env:
-#      PUID: 1000
-#      PGID: 1000
-#      TZ: America/New_York
-#    volumes:
-#      - /var/opt/plextraktsync:/app/config:rw
-#    quadlet_options:
-#      - AutoUpdate=registry
-#      - Pull=always
-#      - |
-#        [Unit]
-#        After=network-online.target nss-lookup.target
-#        [Service]
-#        Restart=always
-#        [Install]
-#        WantedBy=default.target
-#  notify:
-#    - Reload systemd for media
-#    - Restart media
-#- name: Add plextraktsync job
-#  become: true
-#  ansible.builtin.cron:
-#    name: Sync Trakt & Plex
-#    minute: "*/13"
-#    hour: "*"
-#    day: "*"
-#    month: "*"
-#    weekday: "*"
-#    job: podman exec -t -e PUID=1000 -e PGID=1000 -e TZ=America/New_York plextraktsync plextraktsync sync >> /dev/null
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: jellyfin
+    image: lscr.io/linuxserver/jellyfin:{{ jellyfin_version }}
+    state: quadlet
+    hostname: "{{ inventory_hostname }}"
+    quadlet_filename: jellyfin-container
+    device:
+      - /dev/dri:/dev/dri
+    network: host
+    volumes:
+      - /var/opt/jellyfin:/config:rw
+      - /mnt:/mnt:ro
+      - /mnt/YouTube:/mnt/YouTube:rw
+    env:
+      PUID: 1000
+      PGID: 1000
+      TZ: America/New_York
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        After=network-online.target nss-lookup.target
+        [Service]
+        Restart=always
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for media
+    - Restart media
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: plex
+    image: lscr.io/linuxserver/plex:{{ plex_version }}
+    state: quadlet
+    quadlet_filename: plex-container
+    network: host
+    device:
+      - /dev/dri:/dev/dri
+    volumes:
+      - /var/opt/plex:/config:rw
+      - /mnt:/mnt:ro
+      - /mnt/YouTube:/mnt/YouTube:rw
+    env:
+      PUID: 1000
+      PGID: 1000
+      TZ: America/New_York
+      VERSION: docker
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        After=network-online.target nss-lookup.target
+        [Service]
+        Restart=always
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for media
+    - Restart media
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: plextraktsync
+    image: ghcr.io/taxel/plextraktsync:{{ plextraktsync_version }}
+    state: quadlet
+    quadlet_filename: plextraktsync-container
+    network: host
+    command: watch
+    env:
+      PUID: 1000
+      PGID: 1000
+      TZ: America/New_York
+    volumes:
+      - /var/opt/plextraktsync:/app/config:rw
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        After=network-online.target nss-lookup.target
+        [Service]
+        Restart=always
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for media
+    - Restart media
+- name: Add plextraktsync job
+  become: true
+  ansible.builtin.cron:
+    name: Sync Trakt & Plex
+    minute: "*/13"
+    hour: "*"
+    day: "*"
+    month: "*"
+    weekday: "*"
+    job: podman exec -t -e PUID=1000 -e PGID=1000 -e TZ=America/New_York plextraktsync plextraktsync sync >> /dev/null
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
