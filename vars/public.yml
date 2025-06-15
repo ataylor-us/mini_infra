@@ -10,7 +10,7 @@ karakeep_server_version: 0.25.0
 karakeep_chrome_version: 123
 mailrise_domain: mailrise
 mailrise_version: latest
-forgejo_version: 9
+forgejo_version: 10.0.3
 caddy_version: 2.10.0-alpine
 emby_version: latest
 plex_version: latest
