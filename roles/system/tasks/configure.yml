@@ -13,7 +13,8 @@
     replace: ""
     validate: /usr/sbin/visudo -cf %s
   become: true
-- ansible.builtin.copy:
+- name: Adding pwfeedback
+  ansible.builtin.copy:
     content: |
       Defaults        pwfeedback
     dest: /etc/sudoers.d/02-pwfeedback
@@ -21,5 +22,4 @@
     mode: "0440"
     owner: root
     validate: /usr/sbin/visudo -cf %s
-  name: Adding pwfeedback
   become: true
