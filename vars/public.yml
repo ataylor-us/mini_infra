@@ -3,9 +3,7 @@ freshrss_version: 1.26.3
 syncthing_version: latest
 memos_version: 0.24.2
 immich_redis_version: 8-bookworm
-# As of 2025-06-19 the release notes say 0.4.2 is the default, but the actual docker-compose file only says 0.4.1
-# Just wait and update it later
-immich_postgres_version: 14-vectorchord0.4.1-pgvectors0.2.0
+immich_postgres_version: 14-vectorchord0.4.2-pgvectors0.2.0
 immich_server_version: v1.135.1
 karakeep_meilisearch_version: v1.13.3
 karakeep_server_version: 0.25.0
