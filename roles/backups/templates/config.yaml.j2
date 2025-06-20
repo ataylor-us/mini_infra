@@ -7,6 +7,8 @@ source_directories:
 repositories:
     - path: '{{ remote_borg_repo_path }}'
       label: "remote"
+exclude_patterns:
+  - 'sh:**/.local/share/containers'
 compression: lz4
 encryption_passphrase: '{{ borg_passphrase }}'
 archive_name_format: '{hostname}-{now:%Y-%m-%d-%H%M%S}'
