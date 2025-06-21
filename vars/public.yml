@@ -1,7 +1,7 @@
 ---
 freshrss_version: 1.26.3
 syncthing_version: latest
-memos_version: 0.24.2
+memos_version: 0.24.4
 immich_redis_version: 8-bookworm
 immich_postgres_version: 14-vectorchord0.4.2-pgvectors0.2.0
 immich_server_version: v1.135.3
