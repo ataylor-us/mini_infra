@@ -29,3 +29,7 @@ cockpit_port: 10009
 emby_port: 8097
 plex_port: 32400
 jellyfin_port: 8096
+calibre_port: 10010
+calibre_web_port: 8083
+calibre_version: latest
+calibre_web_version: latest
