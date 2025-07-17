@@ -1,0 +1,7 @@
+---
+packages:
+  - podman
+  - slirp4netns
+services:
+  - calibre-container.service
+  - calibre-web-container.service

@@ -65,3 +65,11 @@ media.{{ domain_name }} {
 #  }
 #  reverse_proxy localhost:{{ plex_port }}
 #}
+https://ebook-gui.{{ domain_name }} {
+  import cloudflare
+  reverse_proxy localhost:{{ calibre_port }}
+}
+https://ebooks.{{ domain_name }} {
+  import cloudflare
+  reverse_proxy localhost:{{ calibre_web_port }}
+}

@@ -47,6 +47,14 @@ sqlite_databases:
     path: /var/opt/karakeep-server/db.db
   - name: karakeep-queue
     path: /var/opt/karakeep-server/queue.db
+  - name: calibre-metadata
+    path: "/var/opt/calibre/Calibre Library/metadata.db"
+  - name: calibre-calnotes
+    path: "/var/opt/calibre/Calibre Library/.calnotes/notes.db"
+  - name: calibre-web-app
+    path: /var/opt/calibre-web/app.db
+  - name: calibre-web-gdrive
+    path: /var/opt/calibre-web/gdrive.db
 postgresql_databases:
   - name: all
     username: postgres

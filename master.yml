@@ -19,6 +19,7 @@
     - role: notifications
     - role: links
     - role: media
+    - role: ebooks
   tasks:
     - name: Add podman cleanup job
       become: true
