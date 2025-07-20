@@ -23,3 +23,46 @@
     owner: root
     validate: /usr/sbin/visudo -cf %s
   become: true
+- name: Ensure mount dirs exist
+  become: true
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+    owner: root
+    group: root
+  loop:
+    - /media/issd2
+    - /media/essd1
+- name: Check if mergerfs is installed
+  become: true
+  ansible.builtin.command: rpm -q mergerfs
+  register: mergerfs_check
+  ignore_errors: true
+  changed_when: false
+- name: Download mergerfs
+  become: true
+  ansible.builtin.get_url:
+    url: "{{ mergerfs_rpm_url }}"
+    dest: "{{ mergerfs_rpm_file }}"
+  when: mergerfs_check.rc != 0
+- name: Install mergerfs
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ mergerfs_rpm_file }}"
+    state: present
+  when: mergerfs_check.rc != 0
+- name: Remove mergerfs rpm after install
+  become: true
+  ansible.builtin.file:
+    path: "{{ mergerfs_rpm_file }}"
+    state: absent
+  when: mergerfs_check.rc != 0
+- name: Mount MergerFS
+  become: true
+  ansible.posix.mount:
+    path: /mnt
+    src: "/media/*"
+    fstype: fuse.mergerfs
+    opts: allow_other,use_ino,cache.files=off,category.create=pfrd,func.getattr=newest,dropcacheonclose=false
+    state: mounted
