@@ -15,9 +15,11 @@
     owner: 1000
     path: /var/opt/{{ item }}
     state: directory
+    recurse: true
   loop:
     - calibre
-    - calibre-web
+    - calibre-web/config
+    - calibre-web/data
 - name: Create a Quadlet file
   become: true
   containers.podman.podman_container:
@@ -55,21 +57,19 @@
   become: true
   containers.podman.podman_container:
     name: calibre-web
-    image: lscr.io/linuxserver/calibre-web:{{ calibre_web_version }}
+    image: docker.io/crocodilestick/calibre-web-automated:{{ calibre_web_version }}
     state: quadlet
     quadlet_filename: calibre-web-container
     network: slirp4netns
     ports: "{{ calibre_web_port }}:8083"
     volumes:
-      - /var/opt/calibre-web:/config:rw
-      - /var/opt/calibre/Calibre Library:/Calibre Library:rw
+      - /var/opt/calibre-web/config:/config:rw
+      - /var/opt/calibre-web/data:/cwa-book-ingest:rw
+      - /var/opt/calibre/Calibre Library:/calibre-library:rw
     env:
       PUID: 1000
       PGID: 1000
       TZ: America/New_York
-      DOCKER_MODS: linuxserver/mods:universal-calibre|ghcr.io/themepark-dev/theme.park:calibre-web
-      TP_THEME: dark
-      AUTHLIB_RELAX_TOKEN_SCOPE: 1
     quadlet_options:
       - AutoUpdate=registry
       - Pull=always
