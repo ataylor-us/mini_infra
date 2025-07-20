@@ -48,11 +48,17 @@ media.{{ domain_name }} {
   import cloudflare
   reverse_proxy localhost:{{ emby_port }}
 }
+# calibre
 https://ebook-gui.{{ domain_name }} {
   import cloudflare
   reverse_proxy localhost:{{ calibre_port }}
 }
+# calibre-web
 https://ebooks.{{ domain_name }} {
   import cloudflare
+  reverse_proxy localhost:{{ calibre_web_port }}
+}
+# local 
+http://{{ local_ip }}:8083 {
   reverse_proxy localhost:{{ calibre_web_port }}
 }
