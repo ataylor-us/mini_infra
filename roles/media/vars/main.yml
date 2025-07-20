@@ -3,6 +3,3 @@ packages:
   - podman
 services:
   - emby-container.service
-#  - plex-container.service
-#  - jellyfin-container.service
-#  - plextraktsync-container.service

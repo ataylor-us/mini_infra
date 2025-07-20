@@ -13,9 +13,8 @@ mailrise_version: latest
 forgejo_version: 11
 caddy_version: 2.10.0-alpine
 emby_version: latest
-plex_version: latest
-jellyfin_version: latest
-plextraktsync_version: latest
+calibre_version: latest
+calibre_web_version: latest
 freshrss_port: 10001
 syncthing_port: 10002
 immich_port: 10003
@@ -27,9 +26,5 @@ forgejo_port: 10007
 memos_port: 10008
 cockpit_port: 10009
 emby_port: 8097
-plex_port: 32400
-jellyfin_port: 8096
 calibre_port: 10010
 calibre_web_port: 8083
-calibre_version: latest
-calibre_web_version: latest
