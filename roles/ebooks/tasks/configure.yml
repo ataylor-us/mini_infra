@@ -5,7 +5,7 @@
     rule: allow
     proto: tcp
     src: "{{ local_subnet }}"
-    port: "{{ calibre_web_port }}"
+    port: "{{ calibre_web_local_port }}"
     comment: Calibre-Web
 - name: Create config directories
   become: true
@@ -15,9 +15,9 @@
     owner: 1000
     path: /var/opt/{{ item }}
     state: directory
-    recurse: true
   loop:
     - calibre
+    - calibre-web
     - calibre-web/config
     - calibre-web/data
 - name: Create a Quadlet file

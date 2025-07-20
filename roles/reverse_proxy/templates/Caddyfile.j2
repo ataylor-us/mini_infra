@@ -59,6 +59,6 @@ https://ebooks.{{ domain_name }} {
   reverse_proxy localhost:{{ calibre_web_port }}
 }
 # local 
-http://{{ local_ip }}:8083 {
+http://{{ local_ip }}:{{ calibre_web_local_port }} {
   reverse_proxy localhost:{{ calibre_web_port }}
 }

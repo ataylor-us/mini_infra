@@ -28,3 +28,4 @@ cockpit_port: 10009
 emby_port: 8097
 calibre_port: 10010
 calibre_web_port: 10011
+calibre_web_local_port: 8083
