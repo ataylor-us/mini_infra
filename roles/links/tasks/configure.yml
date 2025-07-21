@@ -104,5 +104,32 @@
   notify:
     - Reload systemd for karakeep
     - Restart karakeep
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: karakeep-homedash
+    image: ghcr.io/codejawn/karakeep-homedash:{{ karakeep_homedash_version }}
+    state: quadlet
+    quadlet_filename: karakeep-homedash-container
+    network: karakeep
+    ports:
+      - 127.0.0.1:{{ karakeep_homedash_port }}:8595
+    volumes:
+      - /var/opt/karakeep-homedash:/app/config:rw
+      - /var/opt/karakeep-server/db.db:/app/db.db:ro
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        [Unit]
+        After=karakeep-server-container.service network-online.target nss-lookup.target
+        [Service]
+        Restart=always
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for karakeep
+    - Restart karakeep
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
