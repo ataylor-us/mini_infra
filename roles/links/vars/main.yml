@@ -5,3 +5,4 @@ services:
   - karakeep-server-container.service
   - karakeep-chrome-container.service
   - karakeep-meilisearch-container.service
+  - karakeep-homedash-container.service
