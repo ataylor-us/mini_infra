@@ -5,7 +5,7 @@
     rule: allow
     proto: tcp
     src: "{{ local_subnet }}"
-    port: "{{ calibre_web_local_port }}"
+    port: "{{ calibre_web_port }}"
     comment: Calibre-Web
 - name: Create config directories
   become: true

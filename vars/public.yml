@@ -30,6 +30,5 @@ memos_port: 10008
 cockpit_port: 10009
 emby_port: 8097
 calibre_port: 10010
-calibre_web_port: 10011
-calibre_web_local_port: 8083
+calibre_web_port: 8083
 karakeep_homedash_port: 10012
