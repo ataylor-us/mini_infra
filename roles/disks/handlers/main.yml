@@ -1,0 +1,12 @@
+---
+- name: Reload systemd for smartd
+  ansible.builtin.systemd:
+    daemon_reload: true
+  become: true
+  changed_when: true
+- name: Restart smartd
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: restarted
+  become: true
+  loop: "{{ services }}"

@@ -1,0 +1,22 @@
+---
+- name: Ensure systemd override directory exists
+  become: true
+  ansible.builtin.file:
+    path: /etc/systemd/system/smartd.service.d
+    state: directory
+    mode: "0755"
+    owner: root
+    group: root
+- name: Create systemd override for smartd
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/smartd.service.d/override.conf
+    content: |
+      [Service]
+      TimeoutStartSec=180
+    owner: root
+    group: root
+    mode: "0644"
+  notify:
+    - Reload systemd for smartd
+    - Restart smartd

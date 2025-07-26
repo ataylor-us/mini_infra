@@ -6,6 +6,7 @@
     - vars/vault.yml
   roles:
     - role: system
+    - role: disks
     - role: credentials
     - role: artis3n.tailscale.device
     - role: reverse_proxy
