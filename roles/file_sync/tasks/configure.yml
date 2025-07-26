@@ -1,4 +1,25 @@
 ---
+- name: Allow Syncthing
+  become: true
+  community.general.ufw:
+    rule: allow
+    comment: "Syncthing TCP Port"
+    proto: tcp
+    port: 22000
+- name: Allow Syncthing
+  become: true
+  community.general.ufw:
+    rule: allow
+    comment: "Syncthing UDP Port"
+    proto: udp
+    port: 22000
+- name: Allow Syncthing
+  become: true
+  community.general.ufw:
+    rule: allow
+    comment: "Syncthing UDP Port"
+    proto: udp
+    port: 21027
 - name: Create a Quadlet file
   become: true
   containers.podman.podman_container:
@@ -10,6 +31,9 @@
     network: slirp4netns
     ports:
       - 127.0.0.1:{{ syncthing_port }}:8384
+      - 22000:22000/tcp
+      - 22000:22000/udp
+      - 21027:21027/udp
     volumes:
       - /var/opt/syncthing:/config:rw
     env:
