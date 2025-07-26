@@ -7,6 +7,12 @@
   become: true
   ansible.posix.selinux:
     state: disabled
+- name: Disable firewalld
+  ansible.builtin.systemd:
+    enabled: false
+    name: firewalld
+    state: stopped
+  become: true
 - name: Remove mail_badpass from sudoers
   ansible.builtin.replace:
     group: root
