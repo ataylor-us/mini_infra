@@ -32,3 +32,4 @@ emby_port: 8097
 calibre_port: 10010
 calibre_web_port: 8083
 karakeep_homedash_port: 10012
+tailscale_args: "--advertise-exit-node"
