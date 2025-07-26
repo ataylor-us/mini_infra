@@ -3,6 +3,10 @@
   become: true
   community.general.timezone:
     name: America/New_York
+- name: Disable SELinux
+  become: true
+  ansible.posix.selinux:
+    state: disabled
 - name: Remove mail_badpass from sudoers
   ansible.builtin.replace:
     group: root
