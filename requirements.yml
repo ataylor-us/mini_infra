@@ -4,3 +4,5 @@ collections:
   - name: ansible.posix
   - name: containers.podman
   - name: artis3n.tailscale
+roles:
+  - name: exploide.dnf-automatic
