@@ -6,6 +6,7 @@
     - vars/vault.yml
   roles:
     - role: system
+    - role: exploide.dnf-automatic
     - role: disks
     - role: credentials
     - role: artis3n.tailscale.device

@@ -33,3 +33,5 @@ calibre_port: 10010
 calibre_web_port: 8083
 karakeep_homedash_port: 10012
 tailscale_args: "--advertise-exit-node"
+dnf_automatic_upgrade_type: security
+dnf_automatic_email_command_format: "printf 'To: {email_to}\\nFrom: {email_from}\\nSubject: {subject}\\n\\n' | /usr/sbin/sendmail -t"
