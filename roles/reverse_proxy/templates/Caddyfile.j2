@@ -63,3 +63,8 @@ https://ebooks.{{ domain_name }} {
   import cloudflare
   reverse_proxy localhost:{{ calibre_web_port }}
 }
+# obsidian
+https://notes.{{ domain_name }} {
+  import cloudflare
+  reverse_proxy localhost:{{ obsidian_port }}
+}

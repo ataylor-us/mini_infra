@@ -1,0 +1,47 @@
+---
+- name: Create Obsidian config directory
+  become: true
+  ansible.builtin.file:
+    group: 1000
+    mode: "0755"
+    owner: 1000
+    path: /var/opt/obsidian
+    state: directory
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: obsidian
+    image: lscr.io/linuxserver/obsidian:{{ obsidian_version }}
+    state: quadlet
+    quadlet_filename: obsidian-container
+    hostname: "{{ inventory_hostname }}"
+    network: slirp4netns
+    ports: 127.0.0.1:{{ obsidian_port }}:3000
+    shm_size: 1g
+    volumes:
+      - /var/opt/obsidian:/config:rw
+    env:
+      PUID: 1000
+      PGID: 1000
+      TZ: America/New_York
+      TITLE: Obsidian
+      DOCKER_MODS: linuxserver/mods:universal-package-install
+      INSTALL_PACKAGES: fonts-noto-cjk
+      NO_DECOR: "true"
+      CUSTOM_USER: "{{ obsidian_user }}"
+      PASSWORD: "{{ obsidian_password }}"
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        After=network-online.target nss-lookup.target
+        [Service]
+        Restart=always
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for obsidian
+    - Restart obsidian
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
