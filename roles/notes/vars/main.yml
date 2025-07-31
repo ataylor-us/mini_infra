@@ -1,0 +1,5 @@
+---
+packages:
+  - podman
+services:
+  - obsidian-container.service
