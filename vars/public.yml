@@ -10,7 +10,6 @@ immich_server_version: v1.137.0
 karakeep_meilisearch_version: v1.13.3
 karakeep_server_version: 0.26.0
 karakeep_chrome_version: 123
-karakeep_homedash_version: latest
 mailrise_domain: mailrise
 mailrise_version: latest
 forgejo_version: 11
@@ -32,7 +31,6 @@ cockpit_port: 10009
 emby_port: 8097
 calibre_port: 10010
 calibre_web_port: 8083
-karakeep_homedash_port: 10012
 obsidian_port: 10011
 tailscale_args: "--advertise-exit-node"
 dnf_automatic_upgrade_type: security
