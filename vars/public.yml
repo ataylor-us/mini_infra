@@ -6,7 +6,7 @@ syncthing_version: latest
 memos_version: 0.24.4
 immich_redis_version: 8-bookworm
 immich_postgres_version: 14-vectorchord0.4.2-pgvectors0.2.0
-immich_server_version: v1.137.0
+immich_server_version: v1.137.3
 karakeep_meilisearch_version: v1.13.3
 karakeep_server_version: 0.26.0
 karakeep_chrome_version: 123
