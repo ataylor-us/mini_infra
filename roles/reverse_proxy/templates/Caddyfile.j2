@@ -43,11 +43,6 @@ links.{{ domain_name }} {
   import cloudflare
   reverse_proxy localhost:{{ karakeep_port }}
 }
-# karakeep-homedash
-home.{{ domain_name }} {
-  import cloudflare
-  reverse_proxy localhost:{{ karakeep_homedash_port }}
-}
 # emby
 media.{{ domain_name }} {
   import cloudflare
