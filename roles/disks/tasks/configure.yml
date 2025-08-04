@@ -44,7 +44,7 @@
     state: mounted
 - name: Mount internal drive
   become: true
-  ansible.builtin.mount:
+  ansible.posix.mount:
     path: /media/issd2
     src: UUID=e7c76703-b8a6-45e3-99b8-6238adb4df16
     fstype: auto
@@ -52,7 +52,7 @@
     state: mounted
 - name: Mount internal drive
   become: true
-  ansible.builtin.mount:
+  ansible.posix.mount:
     path: /media/essd1
     src: UUID=d39215ac-c72d-40bc-be53-353d9ef8bea6
     fstype: auto
