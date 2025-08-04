@@ -18,6 +18,7 @@ emby_version: latest
 calibre_version: latest
 calibre_web_version: latest
 obsidian_version: latest
+audiobookshelf_version: latest
 freshrss_port: 10001
 syncthing_port: 10002
 immich_port: 10003
@@ -32,6 +33,7 @@ emby_port: 8097
 calibre_port: 10010
 calibre_web_port: 8083
 obsidian_port: 10011
+audiobookshelf_port: 10012
 tailscale_args: "--advertise-exit-node"
 dnf_automatic_upgrade_type: security
 dnf_automatic_email_command_format: "printf 'To: {email_to}\\nFrom: {email_from}\\nSubject: {subject}\\n\\n' | /usr/sbin/sendmail -t"
