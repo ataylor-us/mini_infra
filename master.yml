@@ -9,7 +9,6 @@
     - role: exploide.dnf-automatic
       become: true
     - role: disks
-    - role: credentials
     - role: artis3n.tailscale.device
     - role: reverse_proxy
     - role: backups
