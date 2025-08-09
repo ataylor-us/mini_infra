@@ -63,8 +63,3 @@ https://audiobooks.{{ domain_name }} {
   import cloudflare
   reverse_proxy localhost:{{ audiobookshelf_port }}
 }
-# obsidian
-https://notes.{{ domain_name }} {
-  import cloudflare
-  reverse_proxy localhost:{{ obsidian_port }}
-}
