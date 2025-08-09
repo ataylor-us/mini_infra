@@ -24,7 +24,6 @@
     - role: media
     - role: ebooks
     - role: audiobooks
-    - role: notes
   tasks:
     - name: Add podman cleanup job
       become: true
