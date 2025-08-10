@@ -1,7 +1,7 @@
 ---
 - name: Install packages
   ansible.builtin.import_tasks: common/tasks/install_packages.yml
-- name: Enable services
-  ansible.builtin.import_tasks: common/tasks/enable_services.yml
+- name: Write configuration
+  ansible.builtin.include_tasks: configure.yml
 - name: Enable sockets
   ansible.builtin.import_tasks: common/tasks/enable_sockets.yml

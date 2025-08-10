@@ -1,0 +1,13 @@
+---
+- name: Allow all traffic on virbr0
+  become: true
+  community.general.ufw:
+    rule: allow
+    interface_in: virbr0
+- name: Allow forwarding to virbr0
+  become: true
+  community.general.ufw:
+    rule: allow
+    route: true
+    interface_in: virbr0
+    interface_out: "{{ ansible_default_ipv4.interface }}"
