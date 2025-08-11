@@ -55,7 +55,3 @@ sqlite_databases:
     path: /var/opt/calibre-web/config/cwa.db
   - name: audiobookshelf
     path: /var/opt/audiobookshelf/config/absdatabase.sqlite
-postgresql_databases:
-  - name: all
-    username: postgres
-    pg_dump_command: podman exec immich-postgres pg_dumpall
