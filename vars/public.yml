@@ -4,9 +4,6 @@ mergerfs_rpm_file: "/tmp/mergerfs-2.40.2-1.fc42.x86_64.rpm"
 freshrss_version: latest
 syncthing_version: latest
 memos_version: 0.24.4
-immich_redis_version: 8-bookworm
-immich_postgres_version: 14-vectorchord0.4.2-pgvectors0.2.0
-immich_server_version: v1.137.3
 karakeep_meilisearch_version: v1.13.3
 karakeep_server_version: 0.26.0
 karakeep_chrome_version: 123
@@ -20,7 +17,6 @@ calibre_web_version: latest
 audiobookshelf_version: latest
 freshrss_port: 10001
 syncthing_port: 10002
-immich_port: 10003
 karakeep_port: 10004
 karakeep_meili_port: 7700
 mailrise_port: 10005

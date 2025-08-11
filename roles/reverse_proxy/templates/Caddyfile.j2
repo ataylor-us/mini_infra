@@ -4,11 +4,6 @@
     dns cloudflare {{ cloudflare_token }}
   }
 }
-# immich
-photos.{{ domain_name }} {
-  import cloudflare
-  reverse_proxy localhost:{{ immich_port }}
-}
 # freshrss
 feeds.{{ domain_name }} {
   import cloudflare
