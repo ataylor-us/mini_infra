@@ -4,11 +4,6 @@
     dns cloudflare {{ cloudflare_token }}
   }
 }
-# freshrss
-feeds.{{ domain_name }} {
-  import cloudflare
-  reverse_proxy localhost:{{ freshrss_port }}
-}
 # memos
 blog.{{ domain_name }} {
   import cloudflare
@@ -18,11 +13,6 @@ blog.{{ domain_name }} {
 git.{{ domain_name }} {
   import cloudflare
   reverse_proxy localhost:{{ forgejo_port }}
-}
-# syncthing
-sync.{{ domain_name }} {
-  import cloudflare
-  reverse_proxy localhost:{{ syncthing_port }}
 }
 # cockpit
 server.{{ domain_name }} {

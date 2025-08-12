@@ -37,7 +37,6 @@
     volumes:
       - /var/opt/emby:/config:rw
       - /mnt:/mnt:ro
-      - /mnt/YouTube:/mnt/YouTube:rw
       - /mnt/Recordings:/mnt/Recordings:rw
     env:
       PUID: 1000

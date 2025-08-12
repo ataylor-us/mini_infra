@@ -15,9 +15,7 @@
     - role: vms
     - role: admin
     - role: version_control
-    - role: feed_reader
     - role: microblogging
-    - role: file_sync
     - role: notifications
     - role: links
     - role: media
