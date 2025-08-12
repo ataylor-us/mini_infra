@@ -81,5 +81,36 @@
   notify:
     - Reload systemd for calibre
     - Restart calibre
+- name: Create a Quadlet file
+  become: true
+  containers.podman.podman_container:
+    name: audiobookshelf
+    image: ghcr.io/advplyr/audiobookshelf:{{ audiobookshelf_version }}
+    state: quadlet
+    quadlet_filename: audiobookshelf-container
+    network: slirp4netns
+    ports:
+      - 127.0.0.1:{{ audiobookshelf_port }}:80
+    volumes:
+      - /var/opt/audiobookshelf/config:/config:rw
+      - /var/opt/audiobookshelf/metadata:/metadata:rw
+      - /mnt:/mnt:ro
+    env:
+      PUID: 1000
+      PGID: 1000
+      TZ: America/New_York
+    quadlet_options:
+      - AutoUpdate=registry
+      - Pull=always
+      - |
+        [Unit]
+        After=network-online.target nss-lookup.target
+        [Service]
+        Restart=always
+        [Install]
+        WantedBy=default.target
+  notify:
+    - Reload systemd for audiobooks
+    - Restart audiobooks
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers

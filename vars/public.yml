@@ -1,5 +1,4 @@
 ---
-memos_version: 0.24.4
 karakeep_meilisearch_version: v1.13.3
 karakeep_server_version: 0.26.0
 karakeep_chrome_version: 123
@@ -16,7 +15,6 @@ karakeep_meili_port: 7700
 mailrise_port: 10005
 open_webui_port: 10006
 forgejo_port: 10007
-memos_port: 10008
 cockpit_port: 10009
 emby_port: 8097
 calibre_port: 10010
