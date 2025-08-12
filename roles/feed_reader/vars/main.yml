@@ -1,6 +1,0 @@
----
-packages:
-  - podman
-  - slirp4netns
-services:
-  - freshrss-container.service
