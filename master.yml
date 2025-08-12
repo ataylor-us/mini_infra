@@ -15,12 +15,10 @@
     - role: vms
     - role: admin
     - role: version_control
-    - role: microblogging
     - role: notifications
     - role: links
     - role: media
     - role: ebooks
-    - role: audiobooks
   tasks:
     - name: Add podman cleanup job
       become: true

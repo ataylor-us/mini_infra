@@ -4,11 +4,6 @@
     dns cloudflare {{ cloudflare_token }}
   }
 }
-# memos
-blog.{{ domain_name }} {
-  import cloudflare
-  reverse_proxy localhost:{{ memos_port }}
-}
 # forgejo
 git.{{ domain_name }} {
   import cloudflare
