@@ -7,52 +7,6 @@
     src: "{{ local_subnet }}"
     port: "{{ calibre_web_port }}"
     comment: Calibre-Web
-- name: Create config directories
-  become: true
-  ansible.builtin.file:
-    group: 1000
-    mode: "0755"
-    owner: 1000
-    path: /var/opt/{{ item }}
-    state: directory
-  loop:
-    - calibre
-    - calibre-web
-    - calibre-web/config
-    - calibre-web/data
-- name: Create a Quadlet file
-  become: true
-  containers.podman.podman_container:
-    name: calibre
-    image: lscr.io/linuxserver/calibre:{{ calibre_version }}
-    state: quadlet
-    quadlet_filename: calibre-container
-    hostname: "{{ inventory_hostname }}"
-    network: slirp4netns
-    ports: 127.0.0.1:{{ calibre_port }}:8080
-    shm_size: 1g
-    volumes:
-      - /var/opt/calibre:/config:rw
-      - /mnt/Downloads:/mnt/Downloads:ro
-    env:
-      PUID: 1000
-      PGID: 1000
-      TZ: America/New_York
-      TITLE: Calibre
-      DOCKER_MODS: linuxserver/mods:universal-package-install
-      INSTALL_PACKAGES: fonts-noto-cjk
-      NO_DECOR: "true"
-    quadlet_options:
-      - AutoUpdate=registry
-      - Pull=always
-      - |
-        [Unit]
-        After=network-online.target nss-lookup.target
-        [Install]
-        WantedBy=default.target
-  notify:
-    - Reload systemd for calibre
-    - Restart calibre
 - name: Create a Quadlet file
   become: true
   containers.podman.podman_container:
@@ -60,8 +14,7 @@
     image: docker.io/crocodilestick/calibre-web-automated:{{ calibre_web_version }}
     state: quadlet
     quadlet_filename: calibre-web-container
-    network: slirp4netns
-    ports: "{{ calibre_web_port }}:8083"
+    network: host
     volumes:
       - /var/opt/calibre-web/config:/config:rw
       - /var/opt/calibre-web/data:/cwa-book-ingest:rw
