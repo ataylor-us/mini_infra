@@ -4,11 +4,6 @@
     dns cloudflare {{ cloudflare_token }}
   }
 }
-# forgejo
-git.{{ domain_name }} {
-  import cloudflare
-  reverse_proxy localhost:{{ forgejo_port }}
-}
 # cockpit
 server.{{ domain_name }} {
   import cloudflare
@@ -18,23 +13,8 @@ server.{{ domain_name }} {
     }
   }
 }
-# karakeep
-links.{{ domain_name }} {
-  import cloudflare
-  reverse_proxy localhost:{{ karakeep_port }}
-}
 # emby
 media.{{ domain_name }} {
   import cloudflare
   reverse_proxy localhost:{{ emby_port }}
-}
-# calibre-web
-https://ebooks.{{ domain_name }} {
-  import cloudflare
-  reverse_proxy localhost:{{ calibre_web_port }}
-}
-# audiobookshelf
-https://audiobooks.{{ domain_name }} {
-  import cloudflare
-  reverse_proxy localhost:{{ audiobookshelf_port }}
 }

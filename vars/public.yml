@@ -1,23 +1,12 @@
 ---
-karakeep_meilisearch_version: v1.13.3
-karakeep_server_version: 0.26.0
-karakeep_chrome_version: 123
 mailrise_domain: mailrise
 mailrise_version: latest
-forgejo_version: 11
 caddy_version: 2.10.0-alpine
 emby_version: latest
-calibre_web_version: latest
-audiobookshelf_version: latest
-karakeep_port: 10004
-karakeep_meili_port: 7700
 mailrise_port: 10005
 open_webui_port: 10006
-forgejo_port: 10007
 cockpit_port: 10009
 emby_port: 8097
-calibre_web_port: 8083
-audiobookshelf_port: 10012
 tailscale_args: "--advertise-exit-node"
 dnf_automatic_upgrade_type: security
 dnf_automatic_email_command_format: "printf 'To: {email_to}\\nFrom: {email_from}\\nSubject: {subject}\\n\\n' | /usr/sbin/sendmail -t"

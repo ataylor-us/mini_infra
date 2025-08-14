@@ -1,7 +1,0 @@
----
-packages:
-  - podman
-  - slirp4netns
-services:
-  - calibre-web-container.service
-  - audiobookshelf-container.service

@@ -2,7 +2,6 @@
 packages:
   - cockpit
   - cockpit-podman
-  - cockpit-machines
   - pcp
   - python3-pcp
 services:
