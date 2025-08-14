@@ -12,13 +12,9 @@
     - role: artis3n.tailscale.device
     - role: reverse_proxy
     - role: backups
-    - role: vms
     - role: admin
-    - role: version_control
     - role: notifications
-    - role: links
     - role: media
-    - role: ebooks
   tasks:
     - name: Add podman cleanup job
       become: true

@@ -1,7 +1,0 @@
----
-packages:
-  - podman
-services:
-  - karakeep-server-container.service
-  - karakeep-chrome-container.service
-  - karakeep-meilisearch-container.service
