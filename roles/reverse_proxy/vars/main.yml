@@ -1,5 +1,0 @@
----
-packages:
-  - podman
-services:
-  - caddy-container.service

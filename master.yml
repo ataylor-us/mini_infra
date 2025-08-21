@@ -10,7 +10,6 @@
       become: true
     - role: disks
     - role: artis3n.tailscale.device
-    - role: reverse_proxy
     - role: backups
     - role: admin
     - role: notifications
