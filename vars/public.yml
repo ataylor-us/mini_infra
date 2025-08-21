@@ -1,11 +1,8 @@
 ---
 mailrise_domain: mailrise
 mailrise_version: latest
-caddy_version: 2.10.0-alpine
 emby_version: latest
 mailrise_port: 10005
-open_webui_port: 10006
-cockpit_port: 10009
 emby_port: 8097
 tailscale_args: "--advertise-exit-node"
 dnf_automatic_upgrade_type: security
